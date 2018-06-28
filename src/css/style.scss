@@ -1,0 +1,23 @@
+body {
+	color: #333;
+	font-size: 14px;
+}	
+
+.img-responsive {
+	display: block;
+	width: 100%;
+	height: auto;
+	min-height: 1px;
+	max-width: 100%;
+}
+
+.ellipsis {
+	display: block;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+
+.weui-grid:after {
+	border-bottom: none !important;
+}

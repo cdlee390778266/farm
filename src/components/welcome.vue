@@ -1,10 +1,10 @@
 <template>
   <div class="welcome">
     <div class="top">
-      <img src="/static/images/enter_top.png" class="img-responsive">
+      <img src="/src/assets/images/enter_top.png" class="img-responsive">
     </div>
     <div class="middle">
-      <img src="/static/images/enter_middle.png">
+      <img src="/src/assets/images/enter_middle.png">
     </div>
     <div class="bottom">
       <div class="bimg1"></div>
@@ -58,7 +58,7 @@
         left: 0;
         right: 0;
         height: 150px;
-        background: url('/static/images/enter_bottom1.png') bottom repeat-x;
+        background: url('/src/assets/images/enter_bottom1.png') bottom repeat-x;
         background-size: contain;
         z-index: 9;
       }
@@ -68,7 +68,7 @@
         left: 0;
         right: 0;
         height: 200px;
-        background: url('/static/images/enter_bottom2.png') right bottom repeat-x;
+        background: url('/src/assets/images/enter_bottom2.png') right bottom repeat-x;
         background-size: contain;
         z-index: 8;
       }
@@ -78,7 +78,7 @@
         left: 0;
         right: 24px;
         height: 200px;
-        background: url('/static/images/enter_bottom3.png') right bottom repeat-x;
+        background: url('/src/assets/images/enter_bottom3.png') right bottom repeat-x;
         background-size: contain;
         z-index: 7;
       }

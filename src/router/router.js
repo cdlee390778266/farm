@@ -1,13 +1,18 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-
 const Welcome  = () => import('../components/welcome')
-const Tabs  = () => import('../components/pages/tabs.vue')
+const Tabs  = () => import('../components/pages/tabs')
+const Home  = () => import('../components/pages/home')
+const Category  = () => import('../components/pages/category')
+const Cart  = () => import('../components/admin/cart')
+const User  = () => import('../components/admin/user')
+const Goods  = () => import('../components/pages/goods')
 
 Vue.use(Router)
 
 const router = new Router({
+  linkActiveClass: 'active',
   routes: [
     {
       path: '/welcome',
@@ -17,7 +22,38 @@ const router = new Router({
     {
       path: '/tabs',
       name: 'tabs',
-      component: Tabs
+      component: Tabs,
+      redirect: '/home',
+      children: [
+        {
+          path: '/home',
+          name: 'home',
+          component: Home
+        },
+        {
+          path: '/category',
+          name: 'category',
+          component: Category,
+          meta: { title: '分类'}
+        },
+        {
+          path: '/cart',
+          name: 'cart',
+          component: Cart,
+          meta: { title: '购物车'}
+        },
+        {
+          path: '/user',
+          name: 'user',
+          component: User,
+          meta: { title: '个人中心'}
+        }
+      ]
+    },
+    {
+      path: '/goods/:id',
+      name: 'goods',
+      component: Goods
     },
     // {
     //   path: '/quotation',
