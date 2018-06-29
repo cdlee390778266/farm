@@ -55,26 +55,15 @@
   	},
   	data() {
   		return {
-  			bannerList: [
-	  			{
-				  url: 'javascript:',
-				  img: '/src/assets/images/home-banner1.png',
-				  title: '',
-				  fallbackImg: '/src/assets/images/default.gif'
-				},
-				{
-				  url: 'javascript:',
-				  img: '/src/assets/images/home-banner1.png',
-				  title: '',
-				  fallbackImg: '/src/assets/images/default.gif'
-				},
-				{
-				  url: 'javascript:',
-				  img: '/src/assets/images/home-banner1.png',
-				  title: '',
-				  fallbackImg: '/src/assets/images/default.gif'
-				}
-			],
+  			defaultBanner:  [
+  				{
+		          "url": "javascript:",
+		          "img": "/src/assets/images/home-banner1.png",
+		          "title": "",
+		          "fallbackImg": "/src/assets/images/default.gif"
+		        }
+  			],
+  			bannerList: [],
 			lattices: [
 	  			{
 				  label: '全部食材',
@@ -107,105 +96,8 @@
 				  link: '/category/5'
 				}
 			],
-			goods: [
-				{
-					iBgClass: 'bg1',
-					title: '商品推荐',
-					titleEn: 'Recommend',
-					moreLink: '',
-					goods: [
-						{
-							imgUrl: '/src/assets/images/goods1.png',
-							title: '野生鲜洋葱',
-							link: '/goods/100'
-						},
-						{
-							imgUrl: '/src/assets/images/goods2.png',
-							title: 'EKU香菇',
-							link: '/goods/100'
-						},
-						{
-							imgUrl: '/src/assets/images/goods3.png',
-							title: '巴山有机土青',
-							link: '/goods/100'
-						},
-						{
-							imgUrl: '/src/assets/images/goods4.png',
-							title: '有机从岭藏红鱼',
-							link: '/goods/100'
-						},
-						{
-							imgUrl: '/src/assets/images/goods5.png',
-							title: '有机牛心鸡蛋',
-							link: '/goods/100'
-						},
-						{
-							imgUrl: '/src/assets/images/goods6.png',
-							title: '有机红椒',
-							link: '/goods/100'
-						}
-					]
-				},
-				{
-					iBgClass: 'bg2',
-					title: '套餐推荐',
-					titleEn: 'set meal',
-					moreLink: '',
-					goods: [
-						{
-							imgUrl: '/src/assets/images/goods7.png',
-							title: '有机从岭藏南瓜',
-							link: '/goods/100'
-						},
-						{
-							imgUrl: '/src/assets/images/goods8.png',
-							title: '五常有机稻花大蒜',
-							link: '/goods/100'
-						},
-						{
-							imgUrl: '/src/assets/images/goods9.png',
-							title: '月意情浓.蔬荟萝卜',
-							link: '/goods/100'
-						}
-					]
-				}
-			],
-			theme: {
-				iBgClass: 'bg3',
-				title: '最新主题',
-				titleEn: 'theme',
-				moreLink: '',
-				theme: [
-					{
-						src: '/src/assets/images/theme1.png',
-						fallbackSrc: '/src/assets/images/default.gif',
-						title: '有"肌"生活,健康享"瘦"',
-						desc: '量身定制，合理搭配，让健身餐不再无奈',
-						url: '/goods/100'
-					},
-					{
-						src: '/src/assets/images/theme2.png',
-						fallbackSrc: '/src/assets/images/default.gif',
-						title: '有机香葵鸡',
-						desc: '一尝香葵鸡，满口葵籽香',
-						url: '/goods/100'
-					},
-					{
-						src: '/src/assets/images/theme3.png',
-						fallbackSrc: '/src/assets/images/default.gif',
-						title: '巴山土猪肉',
-						desc: '一场舌尖上的世纪邂逅',
-						url: '/goods/100'
-					},
-					{
-						src: '/src/assets/images/theme4.png',
-						fallbackSrc: '/src/assets/images/default.gif',
-						title: '有"肌"生活,健康享"瘦"',
-						desc: '量身定制，合理搭配，让健身餐不再无奈',
-						url: '/goods/100'
-					}
-				]
-			}
+			goods: [],
+			theme: {}
   		}
   	},
   	filters: {
@@ -213,6 +105,31 @@
 	    if (!value) return ''
 	    return value.toUpperCase();
 	  }
+	},
+	created() {
+		var _this = this;
+		//banner
+		this.$utils.getJson('/src/assets/data/home/banner.json', function(res) {
+			if(res.data.ResData) {
+				_this.bannerList = res.data.ResData;
+			}else {
+				_this.bannerList = _this.defaultBanner;
+			}
+		}, function(error) {
+			_this.bannerList = _this.defaultBanner;
+		})
+		//推荐商品
+		this.$utils.getJson('/src/assets/data/home/hot.json', function(res) {
+			if(res.data.ResData) {
+				_this.goods = res.data.ResData;
+			}
+		})
+		//最新主题
+		this.$utils.getJson('/src/assets/data/home/theme.json', function(res) {
+			if(res.data.ResData) {
+				_this.theme = res.data.ResData;
+			}
+		})
 	}
   }
 </script>

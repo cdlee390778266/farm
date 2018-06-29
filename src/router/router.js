@@ -8,6 +8,7 @@ const Category  = () => import('../components/pages/category')
 const Cart  = () => import('../components/admin/cart')
 const User  = () => import('../components/admin/user')
 const Goods  = () => import('../components/pages/goods')
+const Hot  = () => import('../components/pages/hot')
 
 Vue.use(Router)
 
@@ -49,6 +50,11 @@ const router = new Router({
           meta: { title: '个人中心'}
         }
       ]
+    },
+    {
+      path: '/hot',
+      name: 'hot',
+      component: Hot
     },
     {
       path: '/goods/:id',

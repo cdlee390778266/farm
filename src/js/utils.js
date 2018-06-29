@@ -1,7 +1,12 @@
+import Vue from 'vue'
 import axios from 'axios'
 import CONFIG from './config'
-import { Loading, Message, MessageBox } from 'element-ui';
 import store from '../store/vuex'
+import  { LoadingPlugin, AlertPlugin, ToastPlugin } from 'vux'
+
+Vue.use(LoadingPlugin)
+Vue.use(AlertPlugin)
+Vue.use(ToastPlugin)
 
 var Utils = {}
 
@@ -16,7 +21,7 @@ Utils.$store = store;
  * @param      {<string>}  code    提示代码
  * @return     {<string>}  提示文字
  */
-Utils.getTipText = function(type , code) {
+Utils.getTipText = function(type, code) {
 	if(!type || !code) return;
 	return CONFIG[type][code] || '';
 }
@@ -25,37 +30,45 @@ Utils.getTipText = function(type , code) {
  * Shows the tip. 显示提示
  *
  * @param      {<string>}  type    	   提示框类型
- * @param      {<string>}  textType    提示文字类型
  * @param      {<string>}  code        提示代码
  */
-Utils.showTip = function(type, textType, code) {
-	Message({
-      showClose: true,
-      message: Utils.getTipText(textType, code),
-      type: type ? type: 'success'
-    })
+Utils.showTip = function(type, code) {
+	if(!type || !code) return;
+	this.$vux.toast.show({
+		text: Utils.getTipText(type, code),
+		position: 'middle'
+	})
 }
 
 /**
  * Hides the tip. 关闭提示框
  */
 Utils.hideTip = function() {
-	Message.close();
+	Vue.$vux.toast.hide()
 }
 
 /**
- * Shows the modal dialog.	弹出框
+ * Shows the alert.
  *
- * @param      {<type>}  type      弹出框类型
- * @param      {<type>}  textType  弹出文字类型
- * @param      {<type>}  code      弹出文字代码
+* @param      {<type>}  type      弹出框类型
+ * @param      {<string>}  code   提示文字key
+ * @param      {Function}  showFn  显示回调
+ * @param      {Function}  hideFn  隐藏回调
  */
-// Utils.showModalDialog = function(type, textType, code) {
-// 	MessageBox.alert(Utils.getTipText(textType, code), '提示', {
-//     	confirmButtonText: '确定',
-//     	type: type ? type: 'success'
-//     })
-// }
+Utils.showAlert = function(type, code, showFn, hideFn) {
+	if(!type || !code) return;
+	this.$vux.alert.show({
+	  	title: '提示',
+	  	content: Utils.getTipText(type, code),
+	  	onShow () {
+	    	if(typeof showFn == 'function') showFn();
+	  	},
+	  	onHide () {
+	    	if(typeof hideFn == 'function') hideFn();
+	  	}
+	})
+
+}
 
 /**
  * Gets the json. 获取json数据
@@ -67,18 +80,14 @@ Utils.hideTip = function() {
  */
 Utils.getJson = function(url, success, error, params = {}) {
 	if(!url) return;
-	var loadingInstance = Loading.service({
-		fullscreen: true,
-		spinner: 'fa fa-refresh fa-spin fa-3x fa-fw ql-loading',
-		customClass: 'loading page-loading'
-	});
+	Vue.$vux.loading.show()
 	Utils.$http.get(url, {params: params})
 		.then(function(res){
-			loadingInstance.close();
+			Vue.$vux.loading.hide()
             if(typeof success == 'function') success(res)
         })
         .catch(function(err){
-        	loadingInstance.close();
+        	Vue.$vux.loading.hide()
         	Utils.showTip('error', 'error', '-1');
             if(typeof error == 'function') error(err)
         })

@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { Message } from 'element-ui';
 import CONFIG from '../js/config';
 import VueCookies from 'vue-cookies'
 
@@ -16,10 +15,14 @@ var cookie = JSON.parse(VueCookies.get(CONFIG.cookieKey));
 
 export default new Vuex.Store({
 	state: {
+		isLoading: false,
 		isLogin: cookie ? true : false ,
 		user: cookie ? cookie : {name: '', password: '', isRemember: false}
 	},
 	mutations: {
+		updateLoadingStatus (state, payload) {
+	      state.isLoading = payload.isLoading
+	    },
 		setUser: function(state, payload) {
 			state.user = payload;
 			if(payload.name) {
