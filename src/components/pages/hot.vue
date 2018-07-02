@@ -4,8 +4,8 @@
         	<tab-item class="vux-center" :selected="index == 0 ? true : false"  v-for="(tab, index) in tabs"  :key="index">{{tab.title}}</tab-item>
       	</tab>
 		<swiper v-model="index" :show-dots="false" height="100%">
-			<swiper-item v-for="(tab, index) in tabs" :key="index">
-				<scroller lock-x  @on-scroll-bottom="onScrollBottom" ref="scrollerBottom" :scroll-bottom-offst="10" height="-40">
+			<swiper-item v-for="(tab, i) in tabs" :key="i">
+				<scroller lock-x  @on-scroll-bottom="onScrollBottom(index)" ref="scrollerBottom" :scroll-bottom-offst="10" height="-40">
 				  	<div class="tab-swiper vux-center">
 				  		<grid :show-vertical-dividers="false" :show-lr-borders="false" :cols="2">
 					      <grid-item v-for="goods in tab.goods" :key="goods.imgUrl">
@@ -23,21 +23,20 @@
 					      </grid-item>
 					    </grid>
 				  	</div>
-				  	<load-more tip="loading"></load-more>
+				  	<load-more tip="加载中..." v-if="tab.hasMore"></load-more>
 			  	</scroller>
 			</swiper-item>
 		</swiper>
 	</div>
 </template>
 <script>
-	import { Tab, TabItem, Sticky, Divider, XButton, Swiper, SwiperItem, Grid, GridItem, Scroller, LoadMore} from 'vux'
+	import { Tab, TabItem, Sticky, Divider, Swiper, SwiperItem, Grid, GridItem, Scroller, LoadMore} from 'vux'
 	export default {
 		components: {
 			Tab,
 			TabItem,
 			Sticky,
 			Divider,
-			XButton,
 			Swiper,
 			SwiperItem,
 			Grid,
@@ -47,7 +46,26 @@
 		},
 		data() {
 			return {
-				tabs: [],
+				tabs: [
+					{
+						title: '最新商品',
+						cid: '0',
+						hasMore: true,
+						goods: []
+					},
+					{
+						title: '热销商品',
+						cid: '1',
+						hasMore: true,
+						goods: []
+					},
+					{
+						title: '时令商品',
+						cid: '2',
+						hasMore: true,
+						goods: []
+					}
+				],
 				index: 0,
 				scrollTop: 0,
 			    onFetching: false,
@@ -55,15 +73,15 @@
 			}
 		},
 		methods: {
-			onScrollBottom () {
+			onScrollBottom (index) {
+			  
 		      if (this.onFetching) {
 		        // do nothing
 		      } else {
 		        this.onFetching = true
 		        setTimeout(() => {
-		          
 		          this.$nextTick(() => {
-		            //this.$refs.scrollerBottom.reset()
+		            this.$refs.scrollerBottom[index].reset()
 		          })
 		          this.onFetching = false
 		        }, 2000)
@@ -72,11 +90,11 @@
 		},
 		created() {
 			var _this = this;
-			this.$utils.getJson('/src/assets/data/hot/tabs.json', function(res) {
+			this.$utils.getJson('/src/assets/data/hot/hot.json', function(res) {
 				if(res.data.ResData) {
-					_this.tabs = res.data.ResData;
+					_this.tabs[0].goods = res.data.ResData;
 				}else {
-					_this.tabs = _this.defaultBanner;
+					_this.tabs[0].goods = _this.defaultBanner;
 				}
 			}, function(error) {
 			})
