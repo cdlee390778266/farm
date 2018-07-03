@@ -34,7 +34,7 @@ Utils.getTipText = function(type, code) {
  */
 Utils.showTip = function(type, code) {
 	if(!type || !code) return;
-	this.$vux.toast.show({
+	Vue.$vux.toast.show({
 		text: Utils.getTipText(type, code),
 		position: 'middle'
 	})
@@ -57,7 +57,7 @@ Utils.hideTip = function() {
  */
 Utils.showAlert = function(type, code, showFn, hideFn) {
 	if(!type || !code) return;
-	this.$vux.alert.show({
+	Vue.$vux.alert.show({
 	  	title: '提示',
 	  	content: Utils.getTipText(type, code),
 	  	onShow () {

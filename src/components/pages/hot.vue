@@ -1,32 +1,34 @@
 <template>
 	<div class="hot">
 		<tab :line-width=2 active-color='#fff' v-model="index" bar-active-color="#fff" default-color="#abf384">
-        	<tab-item class="vux-center" :selected="index == 0 ? true : false"  v-for="(tab, index) in tabs"  :key="index">{{tab.title}}</tab-item>
+        	<tab-item @on-item-click="onScrollBottom(index, 'click')" class="vux-center" :selected="index == 0 ? true : false"  v-for="(tab, index) in tabs"  :key="index">{{tab.title}}</tab-item>
       	</tab>
-		<swiper v-model="index" :show-dots="false" height="100%">
-			<swiper-item v-for="(tab, i) in tabs" :key="i">
-				<scroller lock-x  @on-scroll-bottom="onScrollBottom(index)" ref="scrollerBottom" :scroll-bottom-offst="10" height="-40">
-				  	<div class="tab-swiper vux-center">
-				  		<grid :show-vertical-dividers="false" :show-lr-borders="false" :cols="2">
-					      <grid-item v-for="goods in tab.goods" :key="goods.imgUrl">
-					      	<router-link :to="'/goods/'+goods.gid" class="goods-mes">
-					      		<div class="goods-img" :style="'background-image: url('+ goods.imgUrl +')'">
-					      			<div class="goods-text">
-							      		<span class="ellipsis">{{goods.title}}</span>
-							      		<span><strong>￥{{goods.price}}</strong>/{{goods.weight}}</span>
-							      	</div>
-					      		</div>
-					      	</router-link>
-					      	<div class="goods-handle">
-					      		<x-button mini type="warn">加入购物车</x-button>
-					      	</div>
-					      </grid-item>
-					    </grid>
+		
+		<transition name="fade" v-for="(tab, i) in tabs" :key="i">
+			<scroller lock-x  @on-scroll-bottom="onScrollBottom(index, 'scroll')" ref="scrollerBottom" :scroll-bottom-offst="0" height="-0" class="hot-wrapper" v-show="i == index">
+			  	<div class="box">
+			  		<grid :show-vertical-dividers="false" :show-lr-borders="false" :cols="2">
+				      <grid-item v-for="(goods, i) in tab.goods" :key="i">
+				      	<router-link :to="'/goods/'+goods.gid" class="goods-mes">
+				      		<div class="goods-img" :style="'background-image: url('+ goods.imgUrl +')'">
+				      			<div class="goods-text">
+						      		<span class="ellipsis">{{goods.title}}</span>
+						      		<span><strong>￥{{goods.price}}</strong>/{{goods.weight}}</span>
+						      	</div>
+				      		</div>
+				      	</router-link>
+				      	<div class="goods-handle">
+				      		<x-button mini type="warn">加入购物车</x-button>
+				      	</div>
+				      </grid-item>
+				    </grid>
+				    <div class="nz-loading" v-if="tab.hasMore">
+				  		<spinner type="bubbles" size="25px"></spinner>
+				  		<span class="nz-loading-text">加载中...</span>
 				  	</div>
-				  	<load-more tip="加载中..." v-if="tab.hasMore"></load-more>
-			  	</scroller>
-			</swiper-item>
-		</swiper>
+				</div>
+		  	</scroller>
+		</transition>
 	</div>
 </template>
 <script>
@@ -67,24 +69,32 @@
 					}
 				],
 				index: 0,
-				scrollTop: 0,
-			    onFetching: false,
-			     
+			    onLoading: false
 			}
 		},
 		methods: {
-			onScrollBottom (index) {
-			  
-		      if (this.onFetching) {
+			onScrollBottom (index, type) {
+		      if (this.onLoading) {
 		        // do nothing
 		      } else {
-		        this.onFetching = true
-		        setTimeout(() => {
-		          this.$nextTick(() => {
-		            this.$refs.scrollerBottom[index].reset()
-		          })
-		          this.onFetching = false
-		        }, 2000)
+		      	if(type == 'click' && this.tabs[index].goods.length) return;
+		        this.onLoading = true
+		        var _this = this;
+				this.$utils.getJson('/src/assets/data/hot/hot.json', function(res) {
+					if(res.data.ResData) {
+						if(res.data.ResData.length) {
+							_this.tabs[index].goods = _this.tabs[index].goods.concat(res.data.ResData);
+						}else {
+							_this.tabs[index].hasMore = false;
+						}
+					}
+					_this.$nextTick(() => {
+			        	_this.$refs.scrollerBottom[index].reset()
+			        })
+					_this.onLoading = false;
+				}, function(error) {
+					_this.onLoading = false;	
+				})
 		      }
 		    }
 		},
@@ -94,19 +104,13 @@
 				if(res.data.ResData) {
 					_this.tabs[0].goods = res.data.ResData;
 				}else {
-					_this.tabs[0].goods = _this.defaultBanner;
+					_this.tabs[0].goods = [];
 				}
-			}, function(error) {
-			})
+			}, function(error) {})
 		}
 	}
 </script>
 <style lang="scss">
-	html, body, #app,  {
-	  height: 100%;
-	  width: 100%;
-	  overflow-x: hidden;
-	}
 	.hot {
 		.weui-grids:before {
 			border-top: none;
@@ -127,16 +131,16 @@
 		.vux-tab-ink-bar {
 			bottom: 1px;
 		}
-		height: 100%;
-		.vux-slider > .vux-swiper, .vux-slider {
-			height: 100%;
-		}
-		.vux-swiper {
-			overflow-y: auto !important;
-		}
-		.vux-slider {
-			padding-top: 50px;
+		.hot-wrapper {
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
 			background: #fafafa;
+		}
+		.box {
+			padding-top: 50px;
 		}
 		.goods-mes {
 			display: block;

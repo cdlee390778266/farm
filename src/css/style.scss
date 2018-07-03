@@ -3,6 +3,18 @@ body {
 	font-size: 14px;
 }	
 
+.tc {
+	text-align: center;
+}
+
+.tl {
+	text-align: left;
+}
+
+.tr {
+	text-align: right;
+}
+
 .img-responsive {
 	display: block;
 	width: 100%;
@@ -20,4 +32,25 @@ body {
 
 .weui-grid:after {
 	border-bottom: none !important;
+}
+
+
+.nz-loading {
+	text-align: center;
+	color: #87cb62;
+	.nz-loading-text {
+		position: relative;
+		top: 2px;
+	}
+	.vux-spinner-bubbles {
+		stroke: #87cb62 !important;
+	    fill: #87cb62 !important;
+	}
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }

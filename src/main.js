@@ -4,7 +4,7 @@ import Vue from 'vue'
 import FastClick from 'fastclick'
 import router from './router/router'
 import App from './App'
-import { XButton } from 'vux'
+import { XButton, Spinner } from 'vux'
 
 import './css/style.scss'
 import Utils from './js/utils.js'
@@ -13,6 +13,7 @@ FastClick.attach(document.body)
 
 Vue.prototype.$utils = Utils
 Vue.component('x-button', XButton)
+Vue.component('spinner', Spinner)
 
 Vue.config.productionTip = false
 
