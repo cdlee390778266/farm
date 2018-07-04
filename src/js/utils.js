@@ -35,8 +35,11 @@ Utils.getTipText = function(type, code) {
 Utils.showTip = function(type, code) {
 	if(!type || !code) return;
 	Vue.$vux.toast.show({
+		type: 'text',
 		text: Utils.getTipText(type, code),
-		position: 'middle'
+		position: 'middle',
+		width: 'auto',
+		isShowMask: true
 	})
 }
 
@@ -88,9 +91,19 @@ Utils.getJson = function(url, success, error, params = {}) {
         })
         .catch(function(err){
         	Vue.$vux.loading.hide()
-        	Utils.showTip('error', 'error', '-1');
+        	Utils.showTip('success', '-1');
             if(typeof error == 'function') error(err)
         })
+}
+
+/**
+ * Adds a cartesian. 加入购物车
+ *
+ * @param      {<type>}  gid     商品id
+ */
+Utils.addCart = function(goods) {
+	if(!goods.id) return;
+	store.dispatch('addCart', Object.assign({}, goods))
 }
 
 /**

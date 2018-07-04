@@ -15,6 +15,8 @@ export default {
 @import '~vux/src/styles/1px.less';
 
 body {
-  background-color: #fff;
+  color: #3c3c3c;
+  font-size: 14px;
+  background-color: #fafafa;
 }
 </style>

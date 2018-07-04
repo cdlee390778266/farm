@@ -15,14 +15,11 @@ var cookie = JSON.parse(VueCookies.get(CONFIG.cookieKey));
 
 export default new Vuex.Store({
 	state: {
-		isLoading: false,
 		isLogin: cookie ? true : false ,
-		user: cookie ? cookie : {name: '', password: '', isRemember: false}
+		user: cookie ? cookie : {name: '', password: '', isRemember: false},
+		cart: []
 	},
 	mutations: {
-		updateLoadingStatus (state, payload) {
-	      state.isLoading = payload.isLoading
-	    },
 		setUser: function(state, payload) {
 			state.user = payload;
 			if(payload.name) {
@@ -33,6 +30,19 @@ export default new Vuex.Store({
 		},
 		setLogin: function(state, payload) {
 			state.isLogin = payload;
+		},
+		addCart: function(state, payload) {
+			var hasGoods = false;
+			for(var i = 0; i < state.cart.length; i++) {
+				if(state.cart[i].id == payload.id) {
+					state.cart[i].num++;
+					hasGoods = true;
+					break;
+				}
+			}
+			if(!hasGoods) {
+				state.cart.push(payload);
+			}
 		}
 	},
 	actions: {
@@ -41,6 +51,9 @@ export default new Vuex.Store({
 		},
 		setLogin: function(context, payload) {
 			context.commit('setLogin', payload);
+		},
+		addCart: function(context, payload) {
+			context.commit('addCart', payload);
 		}
 		
 	},

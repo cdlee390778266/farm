@@ -4,7 +4,7 @@ import Vue from 'vue'
 import FastClick from 'fastclick'
 import router from './router/router'
 import App from './App'
-import { XButton, Spinner } from 'vux'
+import { XButton, Spinner, Grid, GridItem, Tab, TabItem, Divider, Scroller, LoadMore, Cell, Group} from 'vux'
 
 import './css/style.scss'
 import Utils from './js/utils.js'
@@ -14,6 +14,15 @@ FastClick.attach(document.body)
 Vue.prototype.$utils = Utils
 Vue.component('x-button', XButton)
 Vue.component('spinner', Spinner)
+Vue.component('grid', Grid)
+Vue.component('grid-item', GridItem)
+Vue.component('tab', Tab)
+Vue.component('tab-item', TabItem)
+Vue.component('divider', Divider)
+Vue.component('scroller', Scroller)
+Vue.component('load-more', LoadMore)
+Vue.component('cell', Cell)
+Vue.component('group', Group)
 
 Vue.config.productionTip = false
 
