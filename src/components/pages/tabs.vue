@@ -1,6 +1,8 @@
 <template>
   	<div>
-	   	<router-view />
+  		<transition>
+	   		<router-view/>
+	   	</transition>
 	   	<div class="nz-tab-footer">
 		   	<tabbar>
 		      <tabbar-item v-for="(tab, index) in tabs" :key="tab.goUrl" :link="tab.goUrl">

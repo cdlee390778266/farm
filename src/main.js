@@ -4,7 +4,7 @@ import Vue from 'vue'
 import FastClick from 'fastclick'
 import router from './router/router'
 import App from './App'
-import { XButton, Spinner, Grid, GridItem, Tab, TabItem, Divider, Scroller, LoadMore, Cell, Group} from 'vux'
+import { XButton, Spinner, Grid, GridItem, Tab, TabItem, Divider, Scroller, LoadMore, Cell, Group, Flexbox, FlexboxItem} from 'vux'
 
 import './css/style.scss'
 import Utils from './js/utils.js'
@@ -23,6 +23,8 @@ Vue.component('scroller', Scroller)
 Vue.component('load-more', LoadMore)
 Vue.component('cell', Cell)
 Vue.component('group', Group)
+Vue.component('flexbox', Flexbox)
+Vue.component('flexbox-item', FlexboxItem)
 
 Vue.config.productionTip = false
 
