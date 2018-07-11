@@ -86,7 +86,7 @@
   			if(index == 1 && !this.evaluates.length) {
   				var _this = this;
 				//评价
-				this.$utils.getJson('/src/assets/data/goods/evaluates.json', function(res) {
+				this.$utils.getJson('gEvaluatesUrl', function(res) {
 					_this.evaluates = res.data.ResData;
 					_this.page++;
 				}, function(error) {}, {gid: _this.$route.params.id, page: _this.page, pageSize: _this.pageSize})
@@ -95,7 +95,7 @@
 		toggleCollect() {
 			var _this = this;
 			//goodsImgs
-			this.$utils.getJson('/src/assets/data/goods/goods.json', function(res) {
+			this.$utils.getJson('gGoodsUrl', function(res) {
 				_this.goods.isCollect = !_this.goods.isCollect;
 				_this.$utils.showTip('success', '101');
 			}, function(error) {
@@ -119,7 +119,7 @@
 			if(!this.onLoading) {
 				this.onLoading = true;
 				var _this = this;
-				this.$utils.getJson('/src/assets/data/goods/evaluates.json', function(res) {
+				this.$utils.getJson('gEvaluatesUrl', function(res) {
 					if(res.data.ResData) {
 						_this.evaluates = _this.evaluates.concat(res.data.ResData);
 						_this.page++;
@@ -134,7 +134,7 @@
 	created() {
 		var _this = this;
 		//goods
-		this.$utils.getJson('/src/assets/data/goods/goods.json', function(res) {
+		this.$utils.getJson('gGoodsUrl', function(res) {
 			if(res.data.ResData) {
 				_this.goods = res.data.ResData;
 			}else {
@@ -144,7 +144,7 @@
 			_this.goods.imgs = _this.defaultImg;
 		}, {gid: _this.$route.params.id})
 		//商品详情
-		this.$utils.getJson('/src/assets/data/goods/details.json', function(res) {
+		this.$utils.getJson('gDetailsUrl', function(res) {
 			if(res.data.ResData) {
 				_this.details = res.data.ResData;
 			}

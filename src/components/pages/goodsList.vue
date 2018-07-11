@@ -1,11 +1,11 @@
 <template>
 	<div class="hot">
 		<tab :line-width=2 active-color='#fff' v-model="index" bar-active-color="#fff" default-color="#abf384">
-        	<tab-item @on-item-click="onScrollBottom(index, 'click')" class="vux-center" :selected="index == 0 ? true : false"  v-for="(tab, index) in tabs"  :key="index">{{tab.title}}</tab-item>
+        	<tab-item @on-item-click="onScrollBottom(tab, index, 'click')" class="vux-center" :selected="index == 0 ? true : false"  v-for="(tab, index) in tabs"  :key="index">{{tab.title}}</tab-item>
       	</tab>
 		
 		<transition name="fade" v-for="(tab, i) in tabs" :key="i">
-			<scroller lock-x  @on-scroll-bottom="onScrollBottom(index, 'scroll')" ref="scrollerBottom" :scroll-bottom-offst="0" height="-0" class="hot-wrapper" v-show="i == index">
+			<scroller lock-x  @on-scroll-bottom="onScrollBottom(tab, index, 'scroll')" ref="scrollerBottom" :scroll-bottom-offst="0" height="-0" class="hot-wrapper" v-show="i == index">
 			  	<div class="box">
 			  		<grid :show-vertical-dividers="false" :show-lr-borders="false" :cols="2">
 				      <grid-item v-for="(goods, i) in tab.goods" :key="i">
@@ -48,44 +48,36 @@
 		},
 		data() {
 			return {
-				tabs: [
-					{
-						title: '最新商品',
-						cid: '0',
-						hasMore: true,
-						goods: []
-					},
-					{
-						title: '热销商品',
-						cid: '1',
-						hasMore: true,
-						goods: []
-					},
-					{
-						title: '时令商品',
-						cid: '2',
-						hasMore: true,
-						goods: []
-					}
-				],
+				type: 'New',
+				tabKey: 'glNewTabsUrl',
+				goodsKey: 'glNewGoodsUrl',
+				glAllType: ['New', 'CAll'],
+				query: {},
+				tabs: [],
 				index: 0,
 			    onLoading: false
 			}
 		},
 		methods: {
-			onScrollBottom (index, type) {
+			onScrollBottom (tab, index, type) {
 		      if (this.onLoading) {
 		        // do nothing
 		      } else {
-		      	if(type == 'click' && this.tabs[index].goods.length) return;
+		      	var _this = this;
+		      	if(type == 'click'){
+		      		this.query.tabId = tab.tabId;
+		      		this.query.currentPage = tab.currentPage
+		      		if(tab.goods.length) return;
+		      	} 
 		        this.onLoading = true
-		        var _this = this;
-				this.$utils.getJson('/src/assets/data/hot/hot.json', function(res) {
+				this.$utils.getJson(_this.goodsKey, function(res) {
 					if(res.data.ResData) {
 						if(res.data.ResData.length) {
-							_this.tabs[index].goods = _this.tabs[index].goods.concat(res.data.ResData);
+							tab.goods = tab.goods.concat(res.data.ResData);
+							tab.currentPage++;
+		      				_this.query.currentPage = tab.currentPage;
 						}else {
-							_this.tabs[index].hasMore = false;
+							tab.hasMore = false;
 						}
 					}
 					_this.$nextTick(() => {
@@ -93,20 +85,48 @@
 			        })
 					_this.onLoading = false;
 				}, function(error) {
-					_this.onLoading = false;	
-				})
+					_this.onLoading = false;
+				}, _this.query)
 		      }
 		    }
 		},
 		created() {
 			var _this = this;
-			this.$utils.getJson('/src/assets/data/hot/hot.json', function(res) {
-				if(res.data.ResData) {
-					_this.tabs[0].goods = res.data.ResData;
-				}else {
-					_this.tabs[0].goods = [];
+			for(var i = 0; i < _this.glAllType.length; i++) {
+				if(_this.glAllType[i] == _this.$route.params.type) {
+					_this.type = _this.$route.params.type;
+					_this.tabKey = 'gl' + _this.type + 'TabsUrl';
+					_this.goodsKey = 'gl' + _this.type + 'GoodsUrl';
+					break;
 				}
-			}, function(error) {})
+			}
+			_this.query.cid =  _this.$route.query.cid || '';
+
+			//获取tabs
+			_this.$utils.getJson(_this.tabKey, function(res) {
+				if(res.data.ResData) {
+					_this.tabs = res.data.ResData;
+
+					_this.tabs.forEach(function(tab,i){
+					　　tab.currentPage = 1;
+					})
+
+					_this.query.tabId = _this.tabs[0].tabId;
+					_this.query.currentPage = _this.tabs[0].currentPage;
+					//获取tabs第一项商品数据
+					_this.$utils.getJson(_this.goodsKey, function(res) {
+						if(res.data.ResData) {
+							_this.tabs[0].goods = res.data.ResData;
+							_this.tabs[0].currentPage++;
+		      				_this.query.currentPage = _this.tabs[0].currentPage;
+						}else {
+
+						}
+					}, function(error) {}, _this.query)
+				}else {
+
+				}
+			}, function(error) {}, _this.query)
 		}
 	}
 </script>

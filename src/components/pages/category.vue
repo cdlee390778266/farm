@@ -34,7 +34,7 @@
 					<div class="category-goods" :key="category.id" v-for="category in categorys" v-show="category.id == activeTabId">
 						<grid :show-lr-borders="false" :show-vertical-dividers="false">
 					      	<grid-item>
-					       		<router-link to="" class="more">查看全部 ></router-link>
+					       		<router-link :to="{ path:'/goodsList/CAll', query: { cid: category.id} }" class="more">查看全部 ></router-link>
 					      	</grid-item>
 					    </grid>
 					    <grid :cols="3" :show-lr-borders="false" :show-vertical-dividers="false" class="goods-wrapper">
@@ -80,9 +80,10 @@
 		},
 		created() {
 			var _this = this;
-			this.$utils.getJson('/src/assets/data/category/category.json', function(res) {
+			this.$utils.getJson('categoryUrl', function(res) {
 				if(res.data.ResData) {
 					_this.categorys = res.data.ResData;
+					_this.activeTabId = _this.categorys[0].id;
 				}
 			}, function(error) {})
 		}
@@ -95,6 +96,10 @@
   	}
   	.category {
   		.nz-header {
+  			position: fixed;
+	  		top: 0;
+	  		left: 0;
+	  		right: 0;
   			background: #87cb62;
   		}
   		.address {

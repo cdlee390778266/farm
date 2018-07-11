@@ -74,6 +74,17 @@ Utils.showAlert = function(type, code, showFn, hideFn) {
 }
 
 /**
+ * Gets the api 获取API接口地址
+ *
+ * @param      {<type>}  key     键名
+ * @return     {string}  The api url.
+ */
+Utils.getApiUrl = function(key) {
+	if(!key) return '';
+	return CONFIG.api[key] || '';
+}
+
+/**
  * Gets the json. 获取json数据
  *
  * @param      {<type>}    url      url
@@ -81,7 +92,8 @@ Utils.showAlert = function(type, code, showFn, hideFn) {
  * @param      {Function}  error    失败回调
  * @param      {string}    params   参数
  */
-Utils.getJson = function(url, success, error, params = {}) {
+Utils.getJson = function(apiUrlKey, success, error, params = {}) {
+	var url = Utils.getApiUrl(apiUrlKey);
 	if(!url) return;
 	Vue.$vux.loading.show()
 	Utils.$http.get(url, {params: params})

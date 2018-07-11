@@ -8,7 +8,7 @@ const Category  = () => import('../components/pages/category')
 const Cart  = () => import('../components/admin/cart')
 const User  = () => import('../components/admin/user')
 const Goods  = () => import('../components/pages/goods')
-const Hot  = () => import('../components/pages/hot')
+const GoodsList  = () => import('../components/pages/goodsList.vue')
 
 Vue.use(Router)
 
@@ -52,9 +52,9 @@ const router = new Router({
       ]
     },
     {
-      path: '/hot',
-      name: 'hot',
-      component: Hot
+      path: '/goodsList/:type',
+      name: 'goodsList',
+      component: GoodsList
     },
     {
       path: '/goods/:id',

@@ -6,20 +6,40 @@
     <div class="lattice">
 	    <grid :show-vertical-dividers="false" :show-lr-borders="false">
 	      <grid-item v-for="lattice in lattices" :key="lattice.imgUrl" :link="lattice.link">
-	      	<span class="lattice-icon" :class="lattice.bgClass"><img :src="lattice.imgUrl"></span>
+	      	<span class="lattice-icon" :class="lattice.bgClass">
+	      		<!-- <img :src="lattice.imgUrl"> -->
+	      		<x-img :src="lattice.imgUrl" :default-src="'/src/assets/images/default.gif'"></x-img>
+	      	</span>
 	        <span class="lattice-label">{{lattice.label}}</span>
 	      </grid-item>
 	    </grid>
     </div>
     <!-- 商品推荐 -->
-    <div class="goods" v-for="(item, i) in goods" :key="i">
+    <div class="goods">
     	<div class="home-bar">
-    		<i :class="item.iBgClass"></i><strong>{{item.title}}</strong><span>/{{item.titleEn | uppercase}}</span>
-    		<router-link :to="item.moreLink">更多 »</router-link>
+    		<i :class="hotGoods.iBgClass"></i><strong>{{hotGoods.title}}</strong><span>/{{hotGoods.titleEn | uppercase}}</span>
+    		<router-link to="/hot">更多 »</router-link>
     	</div>
     	<div class="goods-wrapper">
 			<grid :show-vertical-dividers="false" :show-lr-borders="false" :cols="3">
-		      <grid-item v-for="(g, i) in item.goods" :key="i">
+		      <grid-item v-for="(g, i) in hotGoods.goods" :key="i">
+		      	<router-link :to="g.link" class="goods-item">
+			      	<div class="good-img" :style="'background-image: url('+ g.imgUrl +')'"></div>
+			      	<span class="ellipsis">{{g.title}}</span>
+		      	</router-link>
+		      </grid-item>
+		    </grid>
+    	</div>
+    </div>
+    <!-- 套餐推荐 -->
+    <div class="goods">
+    	<div class="home-bar">
+    		<i :class="hotSm.iBgClass"></i><strong>{{hotSm.title}}</strong><span>/{{hotSm.titleEn | uppercase}}</span>
+    		<router-link to="/hot">更多 »</router-link>
+    	</div>
+    	<div class="goods-wrapper">
+			<grid :show-vertical-dividers="false" :show-lr-borders="false" :cols="3">
+		      <grid-item v-for="(g, i) in hotSm.goods" :key="i">
 		      	<router-link :to="g.link" class="goods-item">
 			      	<div class="good-img" :style="'background-image: url('+ g.imgUrl +')'"></div>
 			      	<span class="ellipsis">{{g.title}}</span>
@@ -69,34 +89,35 @@
 				  label: '全部食材',
 				  imgUrl: '/src/assets/images/icons/icon9.png',
 				  bgClass: 'bg1',
-				  link: '/category/1'
+				  link: '/goodsList/1'
 				},
 				{
 				  label: '新品上架',
 				  imgUrl: '/src/assets/images/icons/icon10.png',
 				  bgClass: 'bg2',
-				  link: '/category/2'
+				  link: '/goodsList/2'
 				},
 				{
 				  label: '营养套餐',
 				  imgUrl: '/src/assets/images/icons/icon11.png',
 				  bgClass: 'bg3',
-				  link: '/category/3'
+				  link: '/goodsList/3'
 				},
 				{
 				  label: '积分商城',
 				  imgUrl: '/src/assets/images/icons/icon12.png',
 				  bgClass: 'bg4',
-				  link: '/category/4'
+				  link: '/goodsList/4'
 				},
 				{
 				  label: '网点分布',
 				  imgUrl: '/src/assets/images/icons/icon13.png',
 				  bgClass: 'bg5',
-				  link: '/category/5'
+				  link: '/goodsList/5'
 				}
 			],
-			goods: [],
+			hotGoods: {},
+			hotSm: {},
 			theme: {}
   		}
   	},
@@ -109,7 +130,8 @@
 	created() {
 		var _this = this;
 		//banner
-		this.$utils.getJson('/src/assets/data/home/banner.json', function(res) {
+		this.$utils.getJson('hBannerUrl', function(res) {
+			console.log("message");
 			if(res.data.ResData) {
 				_this.bannerList = res.data.ResData;
 			}else {
@@ -119,13 +141,19 @@
 			_this.bannerList = _this.defaultBanner;
 		})
 		//推荐商品
-		this.$utils.getJson('/src/assets/data/home/hot.json', function(res) {
+		this.$utils.getJson('hHotGoodsUrl', function(res) {
 			if(res.data.ResData) {
-				_this.goods = res.data.ResData;
+				_this.hotGoods = res.data.ResData;
+			}
+		})
+		//推荐套餐
+		this.$utils.getJson('hHotSmUrl', function(res) {
+			if(res.data.ResData) {
+				_this.hotSm = res.data.ResData;
 			}
 		})
 		//最新主题
-		this.$utils.getJson('/src/assets/data/home/theme.json', function(res) {
+		this.$utils.getJson('hThemeUrl', function(res) {
 			if(res.data.ResData) {
 				_this.theme = res.data.ResData;
 			}
