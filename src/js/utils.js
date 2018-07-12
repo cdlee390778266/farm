@@ -2,11 +2,12 @@ import Vue from 'vue'
 import axios from 'axios'
 import CONFIG from './config'
 import store from '../store/vuex'
-import  { LoadingPlugin, AlertPlugin, ToastPlugin } from 'vux'
+import  { LoadingPlugin, AlertPlugin, ToastPlugin, ConfirmPlugin } from 'vux'
 
 Vue.use(LoadingPlugin)
 Vue.use(AlertPlugin)
 Vue.use(ToastPlugin)
+Vue.use(ConfirmPlugin);
 
 var Utils = {}
 
@@ -74,6 +75,30 @@ Utils.showAlert = function(type, code, showFn, hideFn) {
 }
 
 /**
+ * Shows the confirm.确认框
+ *
+ * @param      {<type>}    type       确认框类型
+ * @param      {<type>}    code       提示文字key
+ * @param      {Function}  confirmFn  确认回调
+ * @param      {Function}  cancelFn   取消回调
+ * @param      {<type>}    titleCode  标题key
+ */
+Utils.showConfirm = function(type, code, confirmFn, cancelFn, titleCode) {
+	if(!type || !code) return;
+	Vue.$vux.confirm.show({
+	  	title: Utils.getTipText('title', titleCode) || '操作提示',
+	  	content: Utils.getTipText(type, code),
+        onCancel () {
+          if(typeof cancelFn == 'function') cancelFn();
+        },
+        onConfirm () {
+          if(typeof confirmFn == 'function') confirmFn();
+        }
+	})
+
+}
+
+/**
  * Gets the api 获取API接口地址
  *
  * @param      {<type>}  key     键名
@@ -116,6 +141,16 @@ Utils.getJson = function(apiUrlKey, success, error, params = {}) {
 Utils.addCart = function(goods) {
 	if(!goods.id) return;
 	store.dispatch('addCart', Object.assign({}, goods))
+}
+
+/**
+ * { function_description } 保存购物车删除后的商品
+ *
+ * @param      {<type>}  cartGoods  要保存的商品数组
+ */
+Utils.delCart = function(cartGoods) {
+	if(!cartGoods.length) return;
+	store.dispatch('delCart', cartGoods);
 }
 
 /**

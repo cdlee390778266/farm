@@ -36,12 +36,18 @@ export default new Vuex.Store({
 			for(var i = 0; i < state.cart.length; i++) {
 				if(state.cart[i].id == payload.id) {
 					state.cart[i].num++;
+					state.cart[i].isChecked = payload.isChecked;
 					hasGoods = true;
 					break;
 				}
 			}
 			if(!hasGoods) {
 				state.cart.push(payload);
+			}
+		},
+		delCart: function(state, payload) {
+			if(payload) {
+				state.cart = payload;
 			}
 		}
 	},
@@ -54,8 +60,10 @@ export default new Vuex.Store({
 		},
 		addCart: function(context, payload) {
 			context.commit('addCart', payload);
+		},
+		delCart: function(context, payload) {
+			context.commit('delCart', payload);
 		}
-		
 	},
 	getters: {
 	    getUser(state) {

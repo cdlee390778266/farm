@@ -109,9 +109,10 @@
 			}
 			this.$utils.addCart({
 				id: this.goods.id,
+				name: this.goods.name,
 				price: this.goods.price,
-				num: 1, 
-				total: this.goods.price
+				num: 1,
+				imgObj: this.goods.imgs[0]
 			})
 			this.$utils.showTip('success', '101');
 		},
