@@ -81,7 +81,7 @@
 				changeValue: 1,
 				cart: {
 					total: 0,
-					num: 100,
+					num: 0,
 					isEdit: false,
 					isSmCheckedAll: true, 
 					isDelCheckedAll: false, 
@@ -240,6 +240,13 @@
 		    if(!len) return value;
 		    return value.toFixed(len);
 		  }
+		},
+		created() {
+			this.cart.goods = this.$utils.getCart();
+			this.cart.goods.forEach(function(goods, index) {
+				goods.isSmChecked = true;
+				goods.isDelChecked = false;
+			})
 		}
 	}
 </script>

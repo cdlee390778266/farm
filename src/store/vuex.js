@@ -48,6 +48,7 @@ export default new Vuex.Store({
 		delCart: function(state, payload) {
 			if(payload) {
 				state.cart = payload;
+				console.log(state.cart)
 			}
 		}
 	},
@@ -71,6 +72,9 @@ export default new Vuex.Store({
 	    },
 	    getLogin(state) {
 	    	return state.isLogin;
+	    },
+	    getCart(state) {
+	    	return state.cart;
 	    }
 	}
 });

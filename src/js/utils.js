@@ -154,6 +154,13 @@ Utils.delCart = function(cartGoods) {
 }
 
 /**
+ * @return {[type]} 购物车商品
+ */
+Utils.getCart = function() {
+	return store.getters.getCart;
+}
+
+/**
  * Sets the user.设置登录用户
  *
  * @param      {<type>}  user    The user
