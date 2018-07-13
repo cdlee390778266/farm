@@ -1,7 +1,7 @@
 <template>
 	<div class="cart">
 		<div class="cart-body">
-			<div class="goods vux-1px-b" v-for="goods in cart.goods">
+			<div class="goods vux-1px-b" v-for="goods in cart.goods" v-if="cart.num">
 				<flexbox>
 			      	<flexbox-item :span="'36px'">
 			      		<check-icon :value.sync="goods.isSmChecked" v-show="!cart.isEdit" @click.native="chageAllBtnStatus(goods)"></check-icon>
@@ -37,8 +37,11 @@
 					</flexbox-item>
 				</flexbox>
 			</div>
+			<div v-if="!cart.num" class="empty">
+				空空如也，您的购物车打小怪兽去了！
+			</div>
 		</div>
-		<div class="cart-footer vux-1px-t">
+		<div class="cart-footer vux-1px-t" v-show="cart.num">
 			<!-- 结算 -->
 			<flexbox class="cart-smt" v-show="!cart.isEdit">
 		      	<flexbox-item span="126px">
@@ -48,9 +51,9 @@
 		      		<flexbox>
 		      			<flexbox-item class="cart-mes">
 		      				<div class="cart-all-price">合计：<span>￥{{cTotalPrice | toFixed(2)}}</span></div>
-		      				<div>数量：{{cTotalNum}}件</span></div>
+		      				<div><span>数量：{{cTotalNum}}件</span></div>
 		      			</flexbox-item>
-		      			<flexbox-item :span="'120px'" class="cart-btn">
+		      			<flexbox-item :span="'120px'" class="cart-btn" @click.native="goOrder">
 		      				结算({{cTotalNum}})
 		      			</flexbox-item>
 		      		</flexbox>
@@ -85,50 +88,7 @@
 					isEdit: false,
 					isSmCheckedAll: true, 
 					isDelCheckedAll: false, 
-					goods: [
-						{
-					      	id: 1000,
-							price: 90.66,
-							num: 1,
-							isSmChecked: true,
-							isDelChecked: false,
-							name: '巴山有机土猪后腿肉500g',
-							imgObj: {
-					          "url": "javascript:",
-					          "img": "/src/assets/images/goods_img.png",
-					          "title": "巴山有机农家自产香菇900g",
-					          "fallbackImg": "/src/assets/images/default.gif"
-					        }
-					    },
-					    {
-					      	id: 1001,
-							price: 90.66,
-							num: 1,
-							isSmChecked: true,
-							isDelChecked: false,
-							name: '巴山有机土猪后腿肉500g',
-							imgObj: {
-					          "url": "javascript:",
-					          "img": "/src/assets/images/goods_img.png",
-					          "title": "巴山有机农家自产香菇900g",
-					          "fallbackImg": "/src/assets/images/default.gif"
-					        }
-					    },
-					    {
-					      	id: 1002,
-							price: 90.66,
-							num: 1,
-							isSmChecked: true,
-							isDelChecked: false,
-							name: '巴山有机土猪后腿肉500g',
-							imgObj: {
-					          "url": "javascript:",
-					          "img": "/src/assets/images/goods_img.png",
-					          "title": "巴山有机农家自产香菇900g",
-					          "fallbackImg": "/src/assets/images/default.gif"
-					        }
-					    }
-					]
+					goods: []
 				}
 			}
 		},
@@ -209,6 +169,9 @@
 		    	}else {
 		    		_this.$utils.showTip('error', '-1050');
 		    	}
+		    },
+		    goOrder() {
+		    	this.$router.push('/order');
 		    }
 		},
 		computed: {
@@ -303,6 +266,17 @@
 						padding: 10px;
 						color: #333;
 					}
+				}
+			}
+			.empty {
+				padding-top: 100px;
+				text-align: center;
+				color: #aaa;
+				font-size: 16px;
+				img {
+					display: block;
+					margin-left: auto;
+					margin-right: auto;
 				}
 			}
 		}

@@ -17,7 +17,8 @@ export default new Vuex.Store({
 	state: {
 		isLogin: cookie ? true : false ,
 		user: cookie ? cookie : {name: '', password: '', isRemember: false},
-		cart: []
+		cart: [],
+		orderList: []
 	},
 	mutations: {
 		setUser: function(state, payload) {
@@ -48,7 +49,22 @@ export default new Vuex.Store({
 		delCart: function(state, payload) {
 			if(payload) {
 				state.cart = payload;
-				console.log(state.cart)
+			}
+		},
+		addOrder: function(state, payload) {
+			if(payload) {
+				state.orderList.push(payload);
+				state.cart = [];
+			}
+		},
+		delOrder: function(state, payload) {
+			if(payload && payload.orderId) {
+				for(var i = 0; i < state.orderList.length; i++) {
+					if(payload.orderId == state.orderList[i].orderId) {
+						state.orderList.splice(i, 1);
+						break;
+					}
+				}
 			}
 		}
 	},
@@ -64,6 +80,12 @@ export default new Vuex.Store({
 		},
 		delCart: function(context, payload) {
 			context.commit('delCart', payload);
+		},
+		addOrder: function(context, payload) {
+			context.commit('addOrder', payload);
+		},
+		delOrder: function(context, payload) {
+			context.commit('delOrder', payload);
 		}
 	},
 	getters: {
@@ -75,6 +97,9 @@ export default new Vuex.Store({
 	    },
 	    getCart(state) {
 	    	return state.cart;
+	    },
+	    getOrder(state) {
+	    	return state.orderList;
 	    }
 	}
 });

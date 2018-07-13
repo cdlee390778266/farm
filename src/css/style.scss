@@ -31,6 +31,10 @@ body {
 	padding: 10px;
 }
 
+.rel {
+	position: relative;
+}
+
 .img-responsive {
 	display: block;
 	width: 100%;
@@ -75,6 +79,14 @@ body {
 	    -ms-flex: 1;
 	    flex: 1;
     }
+}
+
+.weui-cells {
+	font-size: 14px !important;
+}
+.weui-cell {
+	padding-top: 15px !important;
+	padding-bottom: 15px !important;
 }
 
 .fade-enter-active, .fade-leave-active {

@@ -9,6 +9,8 @@ const Cart  = () => import('../components/admin/cart')
 const User  = () => import('../components/admin/user')
 const Goods  = () => import('../components/pages/goods')
 const GoodsList  = () => import('../components/pages/goodsList.vue')
+const Order  = () => import('../components/admin/order.vue')
+const Pay  = () => import('../components/admin/pay.vue')
 
 Vue.use(Router)
 
@@ -60,6 +62,18 @@ const router = new Router({
       path: '/goods/:id',
       name: 'goods',
       component: Goods
+    },
+    {
+      path: '/order',
+      name: 'order',
+      component: Order,
+      meta: { title: '结算中心'}
+    },
+    {
+      path: '/pay/:orderId',
+      name: 'pay',
+      component: Pay,
+      meta: { title: '支付'}
     },
     // {
     //   path: '/quotation',

@@ -154,10 +154,41 @@ Utils.delCart = function(cartGoods) {
 }
 
 /**
- * @return {[type]} 购物车商品
+ * Gets the cartesian.取得购物车里的商品
+ *
+ * @return     {<type>}  The cartesian.
  */
 Utils.getCart = function() {
 	return store.getters.getCart;
+}
+
+/**
+ * Adds an order.保存订单
+ *
+ * @param      {<type>}  order   The order
+ */
+Utils.addOrder = function(order) {
+	if(!order) return;
+	store.dispatch('addOrder', Object.assign({}, order))
+}
+
+/**
+ * { function_description } 删除订单
+ *
+ * @param      {<type>}  orderId  The order identifier
+ */
+Utils.delOrder = function(orderId) {
+	if(!orderId) return;
+	store.dispatch('delOrder', orderId);
+}
+
+/**
+ * Gets the order.获取订单
+ *
+ * @return     {<type>}  The order.
+ */
+Utils.getOrder = function(orderId) {
+	return store.getters.getOrder;
 }
 
 /**
