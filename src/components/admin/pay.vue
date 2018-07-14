@@ -32,18 +32,40 @@
 		    </group>
 		</div>
 		<div class="order-footer vux-1px-t">
-			
+			<x-button type="warn" @click.native="togglePop">{{order.pay.label}}{{order.total}}元</x-button>
 		</div>
+		<div v-transfer-dom>
+	      <popup v-model="isShowPop" is-transparent style="background-color:#fff;">
+	        <popup-header
+	        left-text="取消"
+	        title="支付详情"
+	        :show-bottom-border="false"
+	        @on-click-left="isShowPop = false"
+	        ></popup-header>
+	        <group class="pay-body">
+				<cell title="需支付" :value="order.total + '元'"></cell>
+			</group>
+	         <div style="padding:20px 15px;">
+	          <x-button type="warn" @click.native="isShowPop = false">确认支付</x-button>
+	         </div>
+	      </popup>
+	    </div>
 	</div>
 </template>
 <script>
-	import { Actionsheet} from 'vux'
+	import { Actionsheet, PopupHeader, Popup, TransferDom} from 'vux'
 	export default {
+		directives: {
+		    TransferDom
+		},
 		components: {
-		    Actionsheet
+		    Actionsheet,
+		    Popup,
+		    PopupHeader
 		},
 		data() {
 			return {
+				isShowPop: false,
 				order: {
 					total: 0,
 					num: 0,
@@ -63,13 +85,16 @@
 			}
 		},
 		methods: {
-		    goPay() {
-		    	
+		    togglePop() {
+		    	this.isShowPop = !this.isShowPop;
 		    }
 		},
 		created() {
 			var orderId = this.$route.params.orderId;
-			this.order = (this.$utils.getOrder(orderId))[0];
+			var order = this.$utils.getOrder(orderId);
+			if(order) {
+				this.order = order;
+			}
 		}
 	}
 </script>
@@ -167,32 +192,19 @@
 			color: #333;
 			background: #fafafa;
 			z-index: 9;
-			.order-smt {
-				height: 50px;
-				.order-smt-l {
-					padding-left: 10px;
-				}
-				.order-mes {
-					font-size: 12px;
-					color: #999999;
-					.order-all-price {
-						margin-top: 5px;
-						font-size: 14px;
-						color: #333;
-						white-space: nowrap;
-						span {
-							color: #fd8727;
-						}
-					}
-				}
-				.order-btn {
-					height: 50px;
-					line-height: 50px;
-					text-align: center;
-					color: #fff;
-					background: #ef4040;
-				}
-			}
   		}
+  		.weui-btn_warn {
+			background: #ef4040;
+			border-radius: 0;
+		}
   	}
+  	.pay-body {
+ 		.weui-cell {
+  			padding-top: 40px !important;
+			padding-bottom: 40px !important;
+  		}
+		.weui-cells:after{
+			display: none;
+		}
+	}
 </style>

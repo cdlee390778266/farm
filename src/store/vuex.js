@@ -33,17 +33,11 @@ export default new Vuex.Store({
 			state.isLogin = payload;
 		},
 		addCart: function(state, payload) {
-			var hasGoods = false;
-			for(var i = 0; i < state.cart.length; i++) {
-				if(state.cart[i].id == payload.id) {
-					state.cart[i].num++;
-					state.cart[i].isChecked = payload.isChecked;
-					hasGoods = true;
-					break;
-				}
-			}
-			if(!hasGoods) {
+			var goods = state.cart.find(item => item.id == payload.id)
+			if(!goods) {
 				state.cart.push(payload);
+			}else {
+				goods.num++
 			}
 		},
 		delCart: function(state, payload) {
@@ -89,17 +83,21 @@ export default new Vuex.Store({
 		}
 	},
 	getters: {
-	    getUser(state) {
+	    getUser: state => {
 	    	return state.user;
 	    },
-	    getLogin(state) {
+	    getLogin: state => {
 	    	return state.isLogin;
 	    },
-	    getCart(state) {
+	    getCart: state => {
 	    	return state.cart;
 	    },
-	    getOrder(state) {
-	    	return state.orderList;
-	    }
+	    getOrder: state => (orderId) => {
+	    	if(orderId) {
+	    		return state.orderList.find(order => order.orderId == orderId);
+	    	}else {
+	    		return state.orderList;
+	    	} 
+		}
 	}
 });

@@ -188,7 +188,7 @@ Utils.delOrder = function(orderId) {
  * @return     {<type>}  The order.
  */
 Utils.getOrder = function(orderId) {
-	return store.getters.getOrder;
+	return store.getters.getOrder(orderId);
 }
 
 /**
