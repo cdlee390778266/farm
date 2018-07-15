@@ -1,5 +1,6 @@
 const CONFIG = {
 	cookieKey: 'user',
+	ajaxCount: 0,
 	api: {
 		hBannerUrl: '/src/assets/data/home/banner.json', //首页banner接口地址
 		hHotGoodsUrl: '/src/assets/data/home/hotgoods.json', //首页推荐商品接口地址
@@ -13,6 +14,7 @@ const CONFIG = {
 		glNewGoodsUrl: '/src/assets/data/goodsList/newGoods.json', //新品列表商品接口地址
 		glCAllTabsUrl: '/src/assets/data/goodsList/cAllNewTabs.json', //分类所有商品列表tabs接口地址
 		glCAllGoodsUrl: '/src/assets/data/goodsList/cAllNewGoods.json', //分类所有商品列表接口地址
+		userInfo: '/src/assets/data/admin/userInfo.json', //用户信息接口
 	},
 	success: {
 		"1": "加载数据成功",

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import CONFIG from '../js/config';
 import VueCookies from 'vue-cookies'
+import Utils from '../js/utils.js'
 
 Vue.use(Vuex);
 
@@ -11,26 +12,26 @@ const debug = process.env.NODE_ENV !== 'production';
 /**
  * export一个store的单例
  */
-var cookie = JSON.parse(VueCookies.get(CONFIG.cookieKey));
+//模拟登录
+VueCookies.set(CONFIG.cookieKey, JSON.stringify({userId: 2001, isLogin: true}), '2d');
 
 export default new Vuex.Store({
 	state: {
-		isLogin: cookie ? true : false ,
-		user: cookie ? cookie : {name: '', password: '', isRemember: false},
+		user: {
+			userId: 0,
+			isLogin: false
+		},
 		cart: [],
 		orderList: []
 	},
 	mutations: {
 		setUser: function(state, payload) {
 			state.user = payload;
-			if(payload.name) {
+			if(payload.isLogin) {
 				VueCookies.set(CONFIG.cookieKey, JSON.stringify(payload), '2d');
 			}else {
 				$cookies.remove(CONFIG.cookieKey);
 			}
-		},
-		setLogin: function(state, payload) {
-			state.isLogin = payload;
 		},
 		addCart: function(state, payload) {
 			var goods = state.cart.find(item => item.id == payload.id)
@@ -66,9 +67,6 @@ export default new Vuex.Store({
 		setUser: function(context, payload) {
 			context.commit('setUser', payload);
 		},
-		setLogin: function(context, payload) {
-			context.commit('setLogin', payload);
-		},
 		addCart: function(context, payload) {
 			context.commit('addCart', payload);
 		},
@@ -85,9 +83,6 @@ export default new Vuex.Store({
 	getters: {
 	    getUser: state => {
 	    	return state.user;
-	    },
-	    getLogin: state => {
-	    	return state.isLogin;
 	    },
 	    getCart: state => {
 	    	return state.cart;

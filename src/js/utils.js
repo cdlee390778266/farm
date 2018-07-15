@@ -126,14 +126,19 @@ Utils.getApiUrl = function(key) {
 Utils.getJson = function(apiUrlKey, success, error, params = {}) {
 	var url = Utils.getApiUrl(apiUrlKey);
 	if(!url) return;
-	Vue.$vux.loading.show()
-	Utils.$http.get(url, {params: params})
+	Vue.$vux.loading.show();
+	CONFIG.ajaxCount++;
+	Utils.$http.get(url, {
+		params: params,
+		timeout: 3000
+	})
 		.then(function(res){
-			Vue.$vux.loading.hide()
+			--CONFIG.ajaxCount ? '' : Vue.$vux.loading.hide();
+			
             if(typeof success == 'function') success(res)
         })
         .catch(function(err){
-        	Vue.$vux.loading.hide()
+        	--CONFIG.ajaxCount ? '' : Vue.$vux.loading.hide();
         	Utils.showTip('success', '-1');
             if(typeof error == 'function') error(err)
         })
