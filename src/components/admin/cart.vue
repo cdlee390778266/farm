@@ -171,7 +171,7 @@
 		    	}
 		    },
 		    goOrder() {
-		    	this.$router.push('/order');
+		    	this.$router.push({name: 'order'});
 		    }
 		},
 		computed: {

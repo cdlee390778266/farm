@@ -18,7 +18,7 @@
 				      		</div>
 				      	</router-link>
 				      	<div class="goods-handle">
-				      		<x-button mini type="warn">加入购物车</x-button>
+				      		<x-button mini type="warn" @click.native="addCart(goods)">加入购物车</x-button>
 				      	</div>
 				      </grid-item>
 				    </grid>
@@ -88,7 +88,23 @@
 					_this.onLoading = false;
 				}, _this.query)
 		      }
-		    }
+		    },
+		    addCart(goods) {
+				if(!goods.gid) {
+					this.$utils.showTip('error', '-1010');
+					return;
+				}
+				this.$utils.addCart({
+					id: goods.gid,
+					name: goods.title,
+					price: goods.price,
+					num: 1,
+					imgObj: {
+						img: goods.imgUrl
+					}
+				})
+				this.$utils.showTip('success', '101');
+			}
 		},
 		created() {
 			var _this = this;

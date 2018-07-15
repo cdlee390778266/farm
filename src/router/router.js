@@ -7,6 +7,7 @@ const Home  = () => import('../components/pages/home')
 const Category  = () => import('../components/pages/category')
 const Cart  = () => import('../components/admin/cart')
 const User  = () => import('../components/admin/user')
+const AdminWrapper = () => import('../components/common/adminWrapper.vue')
 const Goods  = () => import('../components/pages/goods')
 const GoodsList  = () => import('../components/pages/goodsList.vue')
 const Order  = () => import('../components/admin/order.vue')
@@ -54,6 +55,25 @@ const router = new Router({
       ]
     },
     {
+      path: '/admin',
+      name: 'admin',
+      component: AdminWrapper,
+      children: [
+        {
+          path: 'order',
+          name: 'order',
+          component: Order,
+          meta: { title: '结算中心'}
+        },
+        {
+          path: 'pay/:orderId',
+          name: 'pay',
+          component: Pay,
+          meta: { title: '支付'}
+        },
+      ]
+    },
+    {
       path: '/goodsList/:type',
       name: 'goodsList',
       component: GoodsList
@@ -63,18 +83,7 @@ const router = new Router({
       name: 'goods',
       component: Goods
     },
-    {
-      path: '/order',
-      name: 'order',
-      component: Order,
-      meta: { title: '结算中心'}
-    },
-    {
-      path: '/pay/:orderId',
-      name: 'pay',
-      component: Pay,
-      meta: { title: '支付'}
-    },
+    
     // {
     //   path: '/quotation',
     //   name: 'quotation',

@@ -46,7 +46,7 @@
 				<cell title="需支付" :value="order.total + '元'"></cell>
 			</group>
 	         <div style="padding:20px 15px;">
-	          <x-button type="warn" @click.native="isShowPop = false">确认支付</x-button>
+	          <x-button type="warn" @click.native="pay">确认支付</x-button>
 	         </div>
 	      </popup>
 	    </div>
@@ -87,6 +87,13 @@
 		methods: {
 		    togglePop() {
 		    	this.isShowPop = !this.isShowPop;
+		    },
+		    pay() {
+		    	var _this = this;
+		    	this.isShowPop = false;
+		    	this.$utils.showTip('success', '107', function(){}, function() {
+		    			_this.$router.push('/home');
+		    	});
 		    }
 		},
 		created() {

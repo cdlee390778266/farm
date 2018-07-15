@@ -33,14 +33,20 @@ Utils.getTipText = function(type, code) {
  * @param      {<string>}  type    	   提示框类型
  * @param      {<string>}  code        提示代码
  */
-Utils.showTip = function(type, code) {
+Utils.showTip = function(type, code, showFn, hideFn) {
 	if(!type || !code) return;
 	Vue.$vux.toast.show({
 		type: 'text',
 		text: Utils.getTipText(type, code),
 		position: 'middle',
 		width: 'auto',
-		isShowMask: true
+		isShowMask: true,
+		onShow () {
+	    	if(typeof showFn == 'function') showFn();
+	  	},
+	  	onHide () {
+	    	if(typeof hideFn == 'function') hideFn();
+	  	}
 	})
 }
 
