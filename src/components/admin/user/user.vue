@@ -55,7 +55,7 @@
 				if (this.onFetching) {
 			    } else {
 			    	this.onFetching = true;
-			    	_this.$utils.getJson('userInfo', function(res) {
+			    	_this.$utils.getJson('user', function(res) {
 						if(res.data.ResData) {
 							_this.user = res.data.ResData;
 

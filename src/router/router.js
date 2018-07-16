@@ -6,12 +6,19 @@ const Tabs  = () => import('../components/pages/tabs')
 const Home  = () => import('../components/pages/home')
 const Category  = () => import('../components/pages/category')
 const Cart  = () => import('../components/admin/buy/cart')
+const AdminWrapper = () => import('../components/common/adminWrapper')
 const User  = () => import('../components/admin/user/user')
-const AdminWrapper = () => import('../components/common/adminWrapper.vue')
+const UserInfo  = () => import('../components/admin/user/userInfo')
+const Modify  = () => import('../components/admin/user/modify')
+const RecordIntegral  = () => import('../components/admin/user/recordIntegral')
+const SignIn  = () => import('../components/admin/user/signIn')
+const IntegralShop  = () => import('../components/admin/user/integralShop')
+const UsedIntegral = () => import('../components/admin/user/usedIntegral')
+const Integral  = () => import('../components/admin/user/integral')
 const Goods  = () => import('../components/pages/goods')
-const GoodsList  = () => import('../components/pages/goodsList.vue')
-const Order  = () => import('../components/admin/buy/order.vue')
-const Pay  = () => import('../components/admin/buy/pay.vue')
+const GoodsList  = () => import('../components/pages/goodsList')
+const Order  = () => import('../components/admin/buy/order')
+const Pay  = () => import('../components/admin/buy/pay')
 
 Vue.use(Router)
 
@@ -71,6 +78,48 @@ const router = new Router({
           component: Pay,
           meta: { title: '支付'}
         },
+        {
+          path: 'userInfo',
+          name: 'userInfo',
+          component: UserInfo,
+          meta: { title: '我的信息'}
+        },
+        {
+          path: 'modify',
+          name: 'modify',
+          component: Modify,
+          meta: { title: '信息修改'}
+        },
+        {
+          path: 'integral',
+          name: 'integral',
+          component: Integral,
+          meta: { title: '我的积分'}
+        },
+        {
+          path: 'recordIntegral',
+          name: 'recordIntegral',
+          component: RecordIntegral,
+          meta: { title: '积分记录'}
+        },
+        {
+          path: 'signIn',
+          name: 'signIn',
+          component: SignIn,
+          meta: { title: '签到'}
+        },
+        {
+          path: 'integralShop',
+          name: 'integralShop',
+          component: IntegralShop,
+          meta: { title: '积分商城'}
+        },
+        {
+          path: 'usedIntegral',
+          name: 'usedIntegral',
+          component: UsedIntegral,
+          meta: { title: '消费积分'}
+        },
       ]
     },
     {
@@ -83,6 +132,7 @@ const router = new Router({
       name: 'goods',
       component: Goods
     },
+
     
     // {
     //   path: '/quotation',

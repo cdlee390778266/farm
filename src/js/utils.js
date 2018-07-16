@@ -134,7 +134,6 @@ Utils.getJson = function(apiUrlKey, success, error, params = {}) {
 	})
 		.then(function(res){
 			--CONFIG.ajaxCount ? '' : Vue.$vux.loading.hide();
-			
             if(typeof success == 'function') success(res)
         })
         .catch(function(err){
