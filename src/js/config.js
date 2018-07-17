@@ -14,13 +14,18 @@ const CONFIG = {
 		glNewGoodsUrl: '/src/assets/data/goodsList/newGoods.json', //新品列表商品接口地址
 		glCAllTabsUrl: '/src/assets/data/goodsList/cAllNewTabs.json', //分类所有商品列表tabs接口地址
 		glCAllGoodsUrl: '/src/assets/data/goodsList/cAllNewGoods.json', //分类所有商品列表接口地址
-		user: '/src/assets/data/admin/user.json', //个人中心接口
-		userInfo: '/src/assets/data/admin/userInfo.json', //用户信息接口
-		saveModify: '/src/assets/data/admin/save.json', //保存信息修改接口
-		recordIntegral: '/src/assets/data/admin/recordIntegral.json', //积分记录接口
-		signIn: '/src/assets/data/admin/signIn.json', //签到接口
-		integralShop: '/src/assets/data/admin/integralShop.json', //积分商城接口
-		usedIntegral: '/src/assets/data/admin/usedIntegral.json', //消费积分接口
+		user: '/src/assets/data/admin/user/user.json', //个人中心接口
+		userInfo: '/src/assets/data/admin/user/userInfo.json', //用户信息接口
+		saveModify: '/src/assets/data/admin/user/save.json', //保存信息修改接口
+		orderComplete: '/src/assets/data/admin/order/orderComplete.json', //已完成订单接口
+		orderReceive: '/src/assets/data/admin/order/orderReceive.json', //待收货订单接口
+		orderDistribution: '/src/assets/data/admin/order/orderDistribution.json', //配送中订单接口
+		orderBack: '/src/assets/data/admin/order/orderBack.json', //已完成订单接口
+		recordIntegral: '/src/assets/data/admin/integral/recordIntegral.json', //积分记录接口
+		signIn: '/src/assets/data/admin/integral/signIn.json', //签到接口
+		integralShop: '/src/assets/data/admin/integral/integralShop.json', //积分商城接口
+		integralOrderGoods: '/src/assets/data/admin/integral/integralOrderGoods.json', //积分订单商品接口
+		usedIntegral: '/src/assets/data/admin/integral/usedIntegral.json', //消费积分接口
 	},
 	success: {
 		"1": "加载数据成功",
@@ -32,6 +37,10 @@ const CONFIG = {
 		'106': '订单已提交',
 		'107': '支付成功',
 		'108': '保存成功',
+		'109': '确认要删除此订单吗？',
+		'110': '确认要退货吗？',
+		'1100': '您的退货申请已提交给商家，请耐心等待',
+		'111': '提交成功'
 	},
 	error: {
 		'-1': '加载数据失败，请检查网络！',
@@ -50,6 +59,9 @@ const CONFIG = {
 		'-1062': '请选择配送时间！',
 		'-1070': '支付失败！',
 		'-1080': '值不能为空！',
+		'-1090': '删除失败！',
+		'-1100': '',
+		'-1110': '提交失败！',
 
 	},
 	title: {

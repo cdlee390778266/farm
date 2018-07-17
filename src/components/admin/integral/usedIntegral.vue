@@ -3,7 +3,7 @@
 		<div class="goods vux-1px-b" v-for="(goods, index) in usedIntegral" :key="index">
 			<flexbox>
 		      	<flexbox-item :span="'90px'">
-		      		<router-link :to="'/integralGoods/' + goods.gid" :style="'background-image: url( ' + goods.imgUrl + ')'" class="goods-img"></router-link>
+		      		<router-link :to="'/goods/' + goods.gid" :style="'background-image: url( ' + goods.imgUrl + ')'" class="goods-img"></router-link>
 		      	</flexbox-item>
 		      	<flexbox-item class="goods-desc">
 		      		<h1>{{goods.name}}</h1>

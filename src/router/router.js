@@ -7,14 +7,18 @@ const Home  = () => import('../components/pages/home')
 const Category  = () => import('../components/pages/category')
 const Cart  = () => import('../components/admin/buy/cart')
 const AdminWrapper = () => import('../components/common/adminWrapper')
-const User  = () => import('../components/admin/user/user')
+const User  = () => import('../components/admin/user')
 const UserInfo  = () => import('../components/admin/user/userInfo')
 const Modify  = () => import('../components/admin/user/modify')
-const RecordIntegral  = () => import('../components/admin/user/recordIntegral')
-const SignIn  = () => import('../components/admin/user/signIn')
-const IntegralShop  = () => import('../components/admin/user/integralShop')
-const UsedIntegral = () => import('../components/admin/user/usedIntegral')
-const Integral  = () => import('../components/admin/user/integral')
+const OrderList  = () => import('../components/admin/order/orderList')
+const OrderBack  = () => import('../components/admin/order/orderBack')
+const OrderEvaluate  = () => import('../components/admin/order/orderEvaluate')
+const Integral  = () => import('../components/admin/integral/integral')
+const RecordIntegral  = () => import('../components/admin/integral/recordIntegral')
+const SignIn  = () => import('../components/admin/integral/signIn')
+const IntegralShop  = () => import('../components/admin/integral/integralShop')
+const UsedIntegral = () => import('../components/admin/integral/usedIntegral')
+const IntegralOrder  = () => import('../components/admin/integral/integralOrder')
 const Goods  = () => import('../components/pages/goods')
 const GoodsList  = () => import('../components/pages/goodsList')
 const Order  = () => import('../components/admin/buy/order')
@@ -91,6 +95,24 @@ const router = new Router({
           meta: { title: '信息修改'}
         },
         {
+          path: 'orderList',
+          name: 'orderList',
+          component: OrderList,
+          meta: { title: '我的订单'}
+        },
+        {
+          path: 'orderBack/:orderId',
+          name: 'orderBack',
+          component: OrderBack,
+          meta: { title: '退货'}
+        },
+        {
+          path: 'orderEvaluate/:orderId',
+          name: 'orderEvaluate',
+          component: OrderEvaluate,
+          meta: { title: '确定收货'}
+        },
+        {
           path: 'integral',
           name: 'integral',
           component: Integral,
@@ -119,6 +141,12 @@ const router = new Router({
           name: 'usedIntegral',
           component: UsedIntegral,
           meta: { title: '消费积分'}
+        },
+        {
+          path: 'integralOrder/:gid',
+          name: 'integralOrder',
+          component: IntegralOrder,
+          meta: { title: '订单'}
         },
       ]
     },

@@ -69,7 +69,8 @@
 		      		this.query.currentPage = tab.currentPage
 		      		if(tab.goods.length) return;
 		      	} 
-		        this.onLoading = true
+		        this.onLoading = true;
+		        if(!tab.hasMore) return;
 				this.$utils.getJson(_this.goodsKey, function(res) {
 					if(res.data.ResData) {
 						if(res.data.ResData.length) {
