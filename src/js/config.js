@@ -6,14 +6,19 @@ const CONFIG = {
 		hHotGoodsUrl: '/src/assets/data/home/hotgoods.json', //首页推荐商品接口地址
 		hHotSmUrl: '/src/assets/data/home/hotsm.json', //首页套餐推荐接口地址
 		hThemeUrl: '/src/assets/data/home/theme.json', //首页推荐商品接口地址
+		themeGoodsUrl: '/src/assets/data/home/themeGoods.json', //首页推荐商品接口地址
 		gGoodsUrl: '/src/assets/data/goods/goods.json', //商品接口地址
 		gDetailsUrl: '/src/assets/data/goods/details.json', //商品详情接口地址
 		gEvaluatesUrl: '/src/assets/data/goods/evaluates.json', //商品评价接口地址
+		gGoodsSmUrl: '/src/assets/data/goods/goodsSm.json', //套餐商品接口地址
+		gDetailsSmUrl: '/src/assets/data/goods/detailsSm.json', //套餐商品详情接口地址
+		gEvaluatesSmUrl: '/src/assets/data/goods/evaluatesSm.json', //套餐商品评价接口地址
 		categoryUrl: '/src/assets/data/category/category.json', //分类接口地址
 		glNewTabsUrl: '/src/assets/data/goodsList/newTabs.json', //新品列表tabs接口地址
 		glNewGoodsUrl: '/src/assets/data/goodsList/newGoods.json', //新品列表商品接口地址
 		glCAllTabsUrl: '/src/assets/data/goodsList/cAllNewTabs.json', //分类所有商品列表tabs接口地址
 		glCAllGoodsUrl: '/src/assets/data/goodsList/cAllNewGoods.json', //分类所有商品列表接口地址
+		goodsSmListUrl: '/src/assets/data/goodsList/goodsSmList.json', //套餐商品列表接口地址
 		user: '/src/assets/data/admin/user/user.json', //个人中心接口
 		userInfo: '/src/assets/data/admin/user/userInfo.json', //用户信息接口
 		saveModify: '/src/assets/data/admin/user/save.json', //保存信息修改接口
@@ -26,6 +31,7 @@ const CONFIG = {
 		integralShop: '/src/assets/data/admin/integral/integralShop.json', //积分商城接口
 		integralOrderGoods: '/src/assets/data/admin/integral/integralOrderGoods.json', //积分订单商品接口
 		usedIntegral: '/src/assets/data/admin/integral/usedIntegral.json', //消费积分接口
+		collectUrl: '/src/assets/data/admin/collect/collect.json', //收藏列表接口
 	},
 	success: {
 		"1": "加载数据成功",
@@ -40,7 +46,8 @@ const CONFIG = {
 		'109': '确认要删除此订单吗？',
 		'110': '确认要退货吗？',
 		'1100': '您的退货申请已提交给商家，请耐心等待',
-		'111': '提交成功'
+		'111': '收货成功',
+		'112': '确认要删除此条收藏吗？',
 	},
 	error: {
 		'-1': '加载数据失败，请检查网络！',
@@ -62,6 +69,7 @@ const CONFIG = {
 		'-1090': '删除失败！',
 		'-1100': '',
 		'-1110': '提交失败！',
+		'-1120': '删除失败！',
 
 	},
 	title: {

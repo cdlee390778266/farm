@@ -10,32 +10,32 @@
         {
           "imgUrl": "/src/assets/images/goods1.png",
           "title": "野生鲜洋葱",
-          "link": "/goods/1"
+          "gid": "1"
         },
         {
           "imgUrl": "/src/assets/images/goods2.png",
           "title": "EKU香菇",
-          "link": "/goods/4"
+           "gid": "2"
         },
         {
           "imgUrl": "/src/assets/images/goods3.png",
           "title": "巴山有机土青",
-          "link": "/goods/10"
+          "gid": "3"
         },
         {
           "imgUrl": "/src/assets/images/goods4.png",
           "title": "有机从岭藏红鱼",
-          "link": "/goods/10"
+          "gid": "4"
         },
         {
           "imgUrl": "/src/assets/images/goods5.png",
           "title": "有机牛心鸡蛋",
-          "link": "/goods/10"
+          "gid": "5"
         },
         {
           "imgUrl": "/src/assets/images/goods6.png",
           "title": "有机红椒",
-          "link": "/goods/10"
+          "gid": "6"
         }
       ]
     }

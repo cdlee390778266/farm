@@ -18,12 +18,12 @@
     <div class="goods">
     	<div class="home-bar">
     		<i :class="hotGoods.iBgClass"></i><strong>{{hotGoods.title}}</strong><span>/{{hotGoods.titleEn | uppercase}}</span>
-    		<router-link to="/hot">更多 »</router-link>
+    		<router-link to="/goodsList/new">更多 »</router-link>
     	</div>
     	<div class="goods-wrapper">
 			<grid :show-vertical-dividers="false" :show-lr-borders="false" :cols="3">
 		      <grid-item v-for="(g, i) in hotGoods.goods" :key="i">
-		      	<router-link :to="g.link" class="goods-item">
+		      	<router-link :to="'/goods/' + g.gid" class="goods-item">
 			      	<div class="good-img" :style="'background-image: url('+ g.imgUrl +')'"></div>
 			      	<span class="ellipsis">{{g.title}}</span>
 		      	</router-link>
@@ -35,12 +35,12 @@
     <div class="goods">
     	<div class="home-bar">
     		<i :class="hotSm.iBgClass"></i><strong>{{hotSm.title}}</strong><span>/{{hotSm.titleEn | uppercase}}</span>
-    		<router-link to="/hot">更多 »</router-link>
+    		<router-link to="/goodsSmList">更多 »</router-link>
     	</div>
     	<div class="goods-wrapper">
 			<grid :show-vertical-dividers="false" :show-lr-borders="false" :cols="3">
 		      <grid-item v-for="(g, i) in hotSm.goods" :key="i">
-		      	<router-link :to="g.link" class="goods-item">
+		      	<router-link :to="'/goodsSm/' + g.smid" class="goods-item">
 			      	<div class="good-img" :style="'background-image: url('+ g.imgUrl +')'"></div>
 			      	<span class="ellipsis">{{g.title}}</span>
 		      	</router-link>
@@ -54,7 +54,7 @@
     		<i :class="theme.iBgClass"></i><strong>{{theme.title}}</strong><span>/{{theme.titleEn | uppercase}}</span>
     	</div>
     	<div class="theme-wrapper">
-    		<panel :list="theme.theme"></panel>
+    		<panel :list="theme.theme" @on-click-item="goTheme"></panel>
     	</div>
     </div>
     <!-- 电话 -->
@@ -89,7 +89,7 @@
 				  label: '全部食材',
 				  imgUrl: '/src/assets/images/icons/icon9.png',
 				  bgClass: 'bg1',
-				  link: '/goodsList/1'
+				  link: '/goodsList/CAll'
 				},
 				{
 				  label: '新品上架',
@@ -101,13 +101,13 @@
 				  label: '营养套餐',
 				  imgUrl: '/src/assets/images/icons/icon11.png',
 				  bgClass: 'bg3',
-				  link: '/goodsList/3'
+				  link: '/goodsSmList'
 				},
 				{
 				  label: '积分商城',
 				  imgUrl: '/src/assets/images/icons/icon12.png',
 				  bgClass: 'bg4',
-				  link: '/goodsList/4'
+				  link: '/admin/integralShop'
 				},
 				{
 				  label: '网点分布',
@@ -121,6 +121,12 @@
 			theme: {}
   		}
   	},
+  	methods: {
+  		goTheme(theme) {
+  			if(!theme.tid) return;
+  			this.$router.push('/theme/' + theme.tid);
+  		}
+  	},
   	filters: {
 	  uppercase: function (value) {
 	    if (!value) return ''
@@ -131,7 +137,6 @@
 		var _this = this;
 		//banner
 		this.$utils.getJson('hBannerUrl', function(res) {
-			console.log("message");
 			if(res.data.ResData) {
 				_this.bannerList = res.data.ResData;
 			}else {

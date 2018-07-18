@@ -10,17 +10,17 @@
         {
           "imgUrl": "/src/assets/images/goods7.png",
           "title": "有机从岭藏南瓜",
-          "link": "/goods/10"
+          "smid": "1"
         },
         {
           "imgUrl": "/src/assets/images/goods8.png",
           "title": "五常有机稻花大蒜",
-          "link": "/goods/10"
+          "smid": "2"
         },
         {
           "imgUrl": "/src/assets/images/goods9.png",
           "title": "月意情浓.蔬荟萝卜",
-          "link": "/goods/10"
+          "smid": "3"
         }
       ]
     }

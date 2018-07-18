@@ -13,14 +13,19 @@ const Modify  = () => import('../components/admin/user/modify')
 const OrderList  = () => import('../components/admin/order/orderList')
 const OrderBack  = () => import('../components/admin/order/orderBack')
 const OrderEvaluate  = () => import('../components/admin/order/orderEvaluate')
+const Contact  = () => import('../components/admin/order/contact')
 const Integral  = () => import('../components/admin/integral/integral')
 const RecordIntegral  = () => import('../components/admin/integral/recordIntegral')
 const SignIn  = () => import('../components/admin/integral/signIn')
 const IntegralShop  = () => import('../components/admin/integral/integralShop')
 const UsedIntegral = () => import('../components/admin/integral/usedIntegral')
 const IntegralOrder  = () => import('../components/admin/integral/integralOrder')
+const Collect  = () => import('../components/admin/collect/collect')
 const Goods  = () => import('../components/pages/goods')
+const GoodsSm  = () => import('../components/pages/goodsSm')
 const GoodsList  = () => import('../components/pages/goodsList')
+const GoodsSmList  = () => import('../components/pages/goodsSmList')
+const Theme  = () => import('../components/pages/theme')
 const Order  = () => import('../components/admin/buy/order')
 const Pay  = () => import('../components/admin/buy/pay')
 
@@ -113,6 +118,12 @@ const router = new Router({
           meta: { title: '确定收货'}
         },
         {
+          path: 'contact',
+          name: 'contact',
+          component: Contact,
+          meta: { title: '联系我们'}
+        },
+        {
           path: 'integral',
           name: 'integral',
           component: Integral,
@@ -148,6 +159,12 @@ const router = new Router({
           component: IntegralOrder,
           meta: { title: '订单'}
         },
+        {
+          path: 'collect',
+          name: 'collect',
+          component: Collect,
+          meta: { title: '我的收藏'}
+        },
       ]
     },
     {
@@ -156,11 +173,25 @@ const router = new Router({
       component: GoodsList
     },
     {
+      path: '/goodsSmList',
+      name: 'goodsSmList',
+      component: GoodsSmList
+    },
+    {
       path: '/goods/:id',
       name: 'goods',
       component: Goods
     },
-
+    {
+      path: '/goodsSm/:id',
+      name: 'goodsSm',
+      component: GoodsSm
+    },
+    {
+      path: '/theme/:tId',
+      name: 'theme',
+      component: Theme
+    }
     
     // {
     //   path: '/quotation',
