@@ -113,7 +113,7 @@
 				  label: '网点分布',
 				  imgUrl: '/src/assets/images/icons/icon13.png',
 				  bgClass: 'bg5',
-				  link: '/goodsList/5'
+				  link: '/map'
 				}
 			],
 			hotGoods: {},

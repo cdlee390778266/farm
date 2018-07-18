@@ -65,6 +65,9 @@ let webpackConfig = {
         }
       }
     ]
+  },
+  externals: {
+    'AMap': 'AMap'
   }
 }
 

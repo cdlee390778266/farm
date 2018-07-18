@@ -28,6 +28,7 @@ const GoodsSmList  = () => import('../components/pages/goodsSmList')
 const Theme  = () => import('../components/pages/theme')
 const Order  = () => import('../components/admin/buy/order')
 const Pay  = () => import('../components/admin/buy/pay')
+const Map  = () => import('../components/pages/map')
 
 Vue.use(Router)
 
@@ -191,6 +192,11 @@ const router = new Router({
       path: '/theme/:tId',
       name: 'theme',
       component: Theme
+    },
+    {
+      path: '/map',
+      name: 'map',
+      component: Map
     }
     
     // {
