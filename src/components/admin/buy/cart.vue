@@ -1,7 +1,7 @@
 <template>
 	<div class="cart">
 		<div class="cart-body">
-			<div class="goods vux-1px-b" v-for="goods in cart.goods" v-if="cart.num">
+			<div class="goods vux-1px-b" v-for="goods in cart.goods" v-if="cart.goods.length">
 				<flexbox>
 			      	<flexbox-item :span="'36px'">
 			      		<check-icon :value.sync="goods.isSmChecked" v-show="!cart.isEdit" @click.native="chageAllBtnStatus(goods)"></check-icon>
@@ -37,11 +37,11 @@
 					</flexbox-item>
 				</flexbox>
 			</div>
-			<div v-if="!cart.num" class="empty">
+			<div v-if="!cart.goods.length" class="empty">
 				空空如也，您的购物车打小怪兽去了！
 			</div>
 		</div>
-		<div class="cart-footer vux-1px-t" v-show="cart.num">
+		<div class="cart-footer vux-1px-t" v-show="cart.goods.length">
 			<!-- 结算 -->
 			<flexbox class="cart-smt" v-show="!cart.isEdit">
 		      	<flexbox-item span="126px">
@@ -205,10 +205,11 @@
 		  }
 		},
 		created() {
+			var _this = this;
 			this.cart.goods = this.$utils.getCart();
 			this.cart.goods.forEach(function(goods, index) {
-				goods.isSmChecked = true;
-				goods.isDelChecked = false;
+				_this.$set(goods, 'isSmChecked', true);
+				_this.$set(goods, 'isDelChecked', false);
 			})
 		}
 	}

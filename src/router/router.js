@@ -32,9 +32,19 @@ const Map  = () => import('../components/pages/map')
 
 Vue.use(Router)
 
+Router.prototype.goBack = function () {
+  this.isBack = true
+  window.history.go(-1)
+}
+
 const router = new Router({
   linkActiveClass: 'active',
   routes: [
+    {
+      path: '/',
+      name: 'default',
+      redirect: '/welcome'
+    },
     {
       path: '/welcome',
       name: 'welcome',

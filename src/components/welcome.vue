@@ -15,8 +15,10 @@
 </template>
 <script>
   export default {
-    created() {
-      //setTimeout(handler: any, timeout?: long, arguments...: any)
+    mounted() {
+      setTimeout(() => {
+        this.$router.push('/home');
+      }, 2000)
     }
   }
 </script>

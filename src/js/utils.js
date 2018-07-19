@@ -40,7 +40,7 @@ Utils.showTip = function(type, code, showFn, hideFn) {
 		text: Utils.getTipText(type, code),
 		position: 'middle',
 		width: 'auto',
-		isShowMask: true,
+		isShowMask: false,
 		onShow () {
 	    	if(typeof showFn == 'function') showFn();
 	  	},
@@ -159,7 +159,6 @@ Utils.addCart = function(goods) {
  * @param      {<type>}  cartGoods  要保存的商品数组
  */
 Utils.delCart = function(cartGoods) {
-	if(!cartGoods.length) return;
 	store.dispatch('delCart', cartGoods);
 }
 
