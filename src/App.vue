@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <transition :name='transitionName'>
+    <transition :name="transitionName">
       <router-view class="child-view"></router-view>
     </transition>
   </div>
@@ -18,7 +18,7 @@ export default {
   	}
   },
   beforeRouteUpdate (to, from, next) {
-    console.log();
+    console.log(99);
     let isBack = this.$router.isBack
     if (isBack) {
       this.transitionName = 'slide-right'
@@ -56,12 +56,12 @@ body {
 }
 
 .child-view {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width:100%;
-  transition: all .8s cubic-bezier(.55,0,.1,1);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width:100%;
+    transition: all .4s cubic-bezier(.55,0,.1,1);
   }
 </style>

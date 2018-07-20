@@ -8,7 +8,7 @@
 	      <grid-item v-for="lattice in lattices" :key="lattice.imgUrl" :link="lattice.link">
 	      	<span class="lattice-icon" :class="lattice.bgClass">
 	      		<!-- <img :src="lattice.imgUrl"> -->
-	      		<x-img :src="lattice.imgUrl" :default-src="'/src/assets/images/default.gif'"></x-img>
+	      		<img :src="lattice.imgUrl">
 	      	</span>
 	        <span class="lattice-label">{{lattice.label}}</span>
 	      </grid-item>

@@ -207,8 +207,11 @@ const router = new Router({
       path: '/map',
       name: 'map',
       component: Map
+    },
+    {
+      path: '**',
+      redirect: '/home'
     }
-    
     // {
     //   path: '/quotation',
     //   name: 'quotation',
