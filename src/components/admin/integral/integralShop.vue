@@ -13,7 +13,7 @@
 				      		</div>
 				      	</router-link>
 				      	<div class="goods-handle">
-				      		<x-button mini type="warn" :link="'/admin/integralOrder/' + goods.gid">立即兑换</x-button>
+				      		<x-button mini type="warn" @click.native="jump(goods)">立即兑换</x-button>
 				      	</div>
 				      </grid-item>
 				    </grid>
@@ -74,6 +74,9 @@
 					return;
 				}
 				this.$utils.showTip('success', '101');
+			},
+			jump(goods) {
+				this.$router.push('/admin/integralOrder/' + goods.gid);
 			}
 		},
 		created() {

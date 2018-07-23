@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <transition :name="transitionName">
-      <router-view class="child-view"></router-view>
-    </transition>
+      <router-view></router-view>
   </div>
 </template>
 
@@ -13,20 +11,8 @@ export default {
   name: 'app',
   data() {
   	return {
-  		user: {},
-      transitionName: 'slide-left'
+  		user: {}
   	}
-  },
-  beforeRouteUpdate (to, from, next) {
-    console.log(99);
-    let isBack = this.$router.isBack
-    if (isBack) {
-      this.transitionName = 'slide-right'
-    } else {
-      this.transitionName = 'slide-left'
-    }
-    this.$router.isBack = false
-    next()
   },
   created() {
   	var user = JSON.parse(VueCookies.get(CONFIG.cookieKey)) || {};
