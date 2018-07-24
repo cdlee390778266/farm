@@ -5,7 +5,7 @@
 	    </group>
 	    <group>
 	      <cell title="赚积分" value="签到" is-link link="/admin/signIn"></cell>
-	      <cell title="积分商城" value="积分兑换" is-link link="integralShop"></cell>
+	      <cell title="积分商城" value="积分兑换" is-link link="/integralShop"></cell>
 	    </group>
 	    <group title="账单：">
 	      <cell title="消费积分" :value="user.usedIntegral" is-link link="/admin/usedIntegral"></cell>

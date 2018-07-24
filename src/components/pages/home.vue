@@ -107,7 +107,7 @@
 				  label: '积分商城',
 				  imgUrl: '/src/assets/images/icons/icon12.png',
 				  bgClass: 'bg4',
-				  link: '/admin/integralShop'
+				  link: '/integralShop'
 				},
 				{
 				  label: '网点分布',

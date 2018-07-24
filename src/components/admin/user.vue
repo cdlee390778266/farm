@@ -31,7 +31,7 @@
 			      </cell>
 			    </group>
 			    <group>
-			      <cell title="联系客服" is-link link="/admin/contact">
+			      <cell title="联系客服" is-link link="/contact">
 			        <img slot="icon" width="20px" style="display:block;margin-right:5px;" src="/src/assets/images/icons/icon19.png">
 			      </cell>
 			    </group>

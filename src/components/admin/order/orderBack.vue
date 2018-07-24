@@ -34,7 +34,7 @@
 		    </group>
 
 		    <div class="contact">
-		    	<x-button link="/admin/contact"><img  src="/src/assets/images/icons/icon20.png"/>联系客服</x-button>
+		    	<x-button link="/contact"><img  src="/src/assets/images/icons/icon20.png"/>联系客服</x-button>
 		    </div>
 
 		</div>
