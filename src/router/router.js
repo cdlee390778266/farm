@@ -32,6 +32,8 @@ const Map  = () => import('../components/pages/map')
 
 Vue.use(Router)
 
+Router.prototype.historyNameArr = [];
+
 const router = new Router({
   linkActiveClass: 'active',
   routes: [
