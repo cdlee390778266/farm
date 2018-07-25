@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-      <router-view></router-view>
+      <transition :name.sync="transitionName">
+          <router-view class="child-view"></router-view>
+      </transition>
   </div>
 </template>
 
@@ -11,8 +13,20 @@ export default {
   name: 'app',
   data() {
   	return {
-  		user: {}
+  		user: {},
+      transitionName: ''
   	}
+  },
+  watch: {
+   '$route' (to, from) {
+      if(this.$router.historyLeng == window.history.length) {
+        this.$router.animationClassName = "slide-right";
+      }else {
+        this.$router.animationClassName = "slide-left";
+      }
+      this.$router.historyLeng = window.history.length;
+      this.transitionName = this.$router.animationClassName;
+   }
   },
   created() {
   	var user = JSON.parse(VueCookies.get(CONFIG.cookieKey)) || {};

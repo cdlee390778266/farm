@@ -22,7 +22,6 @@ const IntegralOrder  = () => import('../components/admin/integral/integralOrder'
 const Collect  = () => import('../components/admin/collect/collect')
 const Order  = () => import('../components/admin/buy/order')
 
-const Wrapper  = () => import('../components/common/wrapper.vue')
 const Welcome  = () => import('../components/welcome')
 const Pay  = () => import('../components/admin/buy/pay')
 const Map  = () => import('../components/pages/map')
@@ -36,69 +35,63 @@ const Contact  = () => import('../components/admin/order/contact')
 
 Vue.use(Router)
 
-Router.prototype.historyNameArr = [];
+Router.prototype.historyLeng = 0;
+Router.prototype.animationClassName = 'slide-left';
 
 const router = new Router({
   linkActiveClass: 'active',
   routes: [
     {
-      path: '/wrapper',
-      name: 'wrapper',
-      component: Wrapper,
-      children: [
-        {
-          path: '/',
-          name: 'default',
-          redirect: '/welcome'
-        },
-        {
-          path: '/welcome',
-          name: 'welcome',
-          component: Welcome
-        },
-        {
-          path: '/goodsList/:type',
-          name: 'goodsList',
-          component: GoodsList
-        },
-        {
-          path: '/goodsSmList',
-          name: 'goodsSmList',
-          component: GoodsSmList
-        },
-        {
-          path: '/goods/:id',
-          name: 'goods',
-          component: Goods
-        },
-        {
-          path: '/goodsSm/:id',
-          name: 'goodsSm',
-          component: GoodsSm
-        },
-        {
-          path: '/theme/:tId',
-          name: 'theme',
-          component: Theme
-        },
-        {
-          path: '/map',
-          name: 'map',
-          component: Map
-        },
-        {
-          path: '/contact',
-          name: 'contact',
-          component: Contact,
-          meta: { title: '联系我们'}
-        },
-        {
-          path: '/integralShop',
-          name: 'integralShop',
-          component: IntegralShop,
-          meta: { title: '积分商城'}
-        }
-      ]
+      path: '/',
+      name: 'default',
+      redirect: '/welcome'
+    },
+    {
+      path: '/welcome',
+      name: 'welcome',
+      component: Welcome
+    },
+    {
+      path: '/goodsList/:type',
+      name: 'goodsList',
+      component: GoodsList
+    },
+    {
+      path: '/goodsSmList',
+      name: 'goodsSmList',
+      component: GoodsSmList
+    },
+    {
+      path: '/goods/:id',
+      name: 'goods',
+      component: Goods
+    },
+    {
+      path: '/goodsSm/:id',
+      name: 'goodsSm',
+      component: GoodsSm
+    },
+    {
+      path: '/theme/:tId',
+      name: 'theme',
+      component: Theme
+    },
+    {
+      path: '/map',
+      name: 'map',
+      component: Map
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: Contact,
+      meta: { title: '联系我们'}
+    },
+    {
+      path: '/integralShop',
+      name: 'integralShop',
+      component: IntegralShop,
+      meta: { title: '积分商城'}
     },
     {
       path: '/tabs',

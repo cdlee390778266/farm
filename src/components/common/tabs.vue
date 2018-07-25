@@ -1,8 +1,6 @@
 <template>
   	<div>
-  		<transition :name="transitionName">
-	   		<router-view class="child-view"/>
-	   	</transition>
+	   	<router-view/>
 	   	<div class="nz-tab-footer">
 		   	<tabbar>
 		      <tabbar-item v-for="(tab, index) in tabs" :key="tab.goUrl" :link="tab.goUrl">
@@ -53,17 +51,17 @@
 		    	transitionName: 'slide-left'
 		    }
 	  	},
-	  	watch: {
-			'$route' (to, from) {
-				if(this.$router.historyNameArr.length && (to.name == this.$router.historyNameArr[this.$router.historyNameArr.length - 1])) {
-					this.transitionName = 'slide-right';
-					this.$router.historyNameArr.length = this.$router.historyNameArr.length - 1;
-				}else {
-					this.transitionName = 'slide-left';
-					this.$router.historyNameArr.push(from.name);
-				}
-			}
-		}
+	 //  	watch: {
+		// 	'$route' (to, from) {
+		// 		if(this.$router.historyNameArr.length && (to.name == this.$router.historyNameArr[this.$router.historyNameArr.length - 1])) {
+		// 			this.transitionName = 'slide-right';
+		// 			this.$router.historyNameArr.length = this.$router.historyNameArr.length - 1;
+		// 		}else {
+		// 			this.transitionName = 'slide-left';
+		// 			this.$router.historyNameArr.push(from.name);
+		// 		}
+		// 	}
+		// }
 	}
 </script>
 <style scoped lang="scss">

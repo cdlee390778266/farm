@@ -1,8 +1,6 @@
 <template>
   	<div>
-  		<transition :name="transitionName">
-		   	<router-view class="child-view"></router-view>
-		</transition>
+		<router-view></router-view>
 	</div>
 </template>
 
@@ -15,20 +13,20 @@
 		},
 	  	data () {
 		    return {
-		    	transitionName: 'slide-left'
+		    	// transitionName: 'slide-left'
 		    }
 	  	},
-	  	watch: {
-			'$route' (to, from) {
-				if(this.$router.historyNameArr.length && (to.name == this.$router.historyNameArr[this.$router.historyNameArr.length - 1])) {
-					this.transitionName = 'slide-right';
-					this.$router.historyNameArr.length = this.$router.historyNameArr.length - 1;
-				}else {
-					this.transitionName = 'slide-left';
-					this.$router.historyNameArr.push(from.name);
-				}
-			}
-		}
+	 //  	watch: {
+		// 	'$route' (to, from) {
+		// 		if(this.$router.historyNameArr.length && (to.name == this.$router.historyNameArr[this.$router.historyNameArr.length - 1])) {
+		// 			this.transitionName = 'slide-right';
+		// 			this.$router.historyNameArr.length = this.$router.historyNameArr.length - 1;
+		// 		}else {
+		// 			this.transitionName = 'slide-left';
+		// 			this.$router.historyNameArr.push(from.name);
+		// 		}
+		// 	}
+		// }
 	}
 </script>
 <style scoped lang="scss">
